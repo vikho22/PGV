@@ -13,9 +13,9 @@ Juan Carlos Vílchez Muñoz
 
 Enlaces Auxiliares
 
-# Edificios Realistas
+### Edificios Realistas
 https://kenney.nl/assets/retro-urban-kit
-# Edificios Cuadrados
+### Edificios Cuadrados
 https://kenney.nl/assets/modular-buildings
-# Personajes
+### Personajes
 https://www.kenney.nl/assets/blocky-characters
