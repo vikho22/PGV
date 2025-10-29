@@ -17,3 +17,5 @@ Enlaces Auxiliares
 https://kenney.nl/assets/retro-urban-kit
 # Edificios Cuadrados
 https://kenney.nl/assets/modular-buildings
+# Personajes
+https://www.kenney.nl/assets/blocky-characters
