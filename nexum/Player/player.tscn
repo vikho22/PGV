@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt67o5xgdyaa8"]
+
+[ext_resource type="Texture2D" uid="uid://bwj7esxiwqovb" path="res://Textures/texture-a.png" id="1_4ntmi"]
+[ext_resource type="ArrayMesh" uid="uid://dts4bp5623v4g" path="res://Models/character-b.obj" id="2_btcbx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwnis"]
+albedo_texture = ExtResource("1_4ntmi")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k53q1"]
+
+[node name="Player" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_gwnis")
+mesh = ExtResource("2_btcbx")
+surface_material_override/0 = SubResource("StandardMaterial3D_k53q1")
