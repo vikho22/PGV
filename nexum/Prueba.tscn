@@ -1,27 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bts84bwus8t3s"]
+[gd_scene load_steps=6 format=3 uid="uid://okx7b0x243ur"]
 
-[ext_resource type="Script" uid="uid://cg50evqwt0egn" path="res://character_body_3d.gd" id="1_0ri0x"]
-[ext_resource type="PackedScene" uid="uid://cmf4pg881fkvu" path="res://Models/character-e.fbx" id="1_7ucbv"]
+[ext_resource type="PackedScene" uid="uid://cbamc4hkrjmp6" path="res://Player/Player.tscn" id="1_7ucbv"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0ri0x"]
-size = Vector3(1.6055832, 2.7099915, 0.80444336)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ri0x"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_vnpk6"]
+sky_material = SubResource("ProceduralSkyMaterial_0ri0x")
+
+[sub_resource type="Environment" id="Environment_lgsii"]
+background_mode = 2
+sky = SubResource("Sky_vnpk6")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vnpk6"]
 size = Vector3(42.626114, 0.20361328, 60.834045)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("1_0ri0x")
+[node name="Player" parent="." instance=ExtResource("1_7ucbv")]
 
-[node name="character-e" parent="CharacterBody3D" instance=ExtResource("1_7ucbv")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10105801, 0, -0.018547058)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10090256, 1.351181, -0.014770508)
-shape = SubResource("BoxShape3D_0ri0x")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lgsii")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9574305, 0.2886642, 0, -0.2886642, 0.9574305, 0, 2.5698676, 4.3239827)

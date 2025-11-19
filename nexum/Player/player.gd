@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-@onready var anim_player = $"character-e/AnimationPlayer"
+@onready var anim_player = $"character-d/AnimationPlayer"
 
-@export var speed = 5.0
-@export var jumpVelocity = 4.5
+@export var SPEED = 5.0
+@export var JUMP_VELOCITY = 4.5
 
 func _physics_process(delta: float) -> void:
 	# Aplicar gravedad
@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
 
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jumpVelocity
+		velocity.y = JUMP_VELOCITY
 
 	var direction = Vector3.ZERO
 
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		anim_player.play("idle")
 
 	# Aplica velocidad horizontal
-	var horizontal_velocity = direction * speed
+	var horizontal_velocity = direction * SPEED
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.z
 
