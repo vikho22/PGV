@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtd7s6kwdtikl"]
+
+[ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Enemies/zombie.gd" id="1_3p8yn"]
+[ext_resource type="PackedScene" uid="uid://cirtd87bgt8r7" path="res://Models/character-l.fbx" id="1_7ss6f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3p8yn"]
+size = Vector3(1.5825195, 2.8605652, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_13ig7"]
+radius = 100.0
+
+[node name="Enemies" type="CharacterBody3D"]
+script = ExtResource("1_3p8yn")
+
+[node name="zombie" parent="." instance=ExtResource("1_7ss6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13765168, 0, 0.23544669)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12472522, 1.3234267, 0)
+shape = SubResource("BoxShape3D_3p8yn")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+
+[node name="DetectorJugador" type="Area3D" parent="."]
+collision_layer = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectorJugador"]
+shape = SubResource("SphereShape3D_13ig7")
