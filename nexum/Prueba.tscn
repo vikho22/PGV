@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://okx7b0x243ur"]
+[gd_scene load_steps=7 format=3 uid="uid://okx7b0x243ur"]
 
+[ext_resource type="Script" uid="uid://dmuryw604gyjl" path="res://prueba.gd" id="1_0ri0x"]
 [ext_resource type="PackedScene" uid="uid://cbamc4hkrjmp6" path="res://Player/Player.tscn" id="1_7ucbv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ri0x"]
@@ -19,6 +20,7 @@ glow_enabled = true
 size = Vector3(42.626114, 0.20361328, 60.834045)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_0ri0x")
 
 [node name="Player" parent="." instance=ExtResource("1_7ucbv")]
 
