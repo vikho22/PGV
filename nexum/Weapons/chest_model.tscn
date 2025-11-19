@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://3e18nh58ejyv"]
+
+[ext_resource type="PackedScene" uid="uid://hvmts6jcmhrn" path="res://Weapons/crate-medium.fbx" id="1_mf0i8"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kimrg"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="crate-medium" parent="." instance=ExtResource("1_mf0i8")]
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="crate-medium"]
+libraries = {
+&"": SubResource("AnimationLibrary_kimrg")
+}
