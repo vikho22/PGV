@@ -3,11 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="1_s4osm"]
 [ext_resource type="Script" uid="uid://dai2ik7hubinq" path="res://Scripts/weapon_on_floor.gd" id="2_1tfd7"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1tfd7"]
-size = Vector3(1, 0.6054077, 0.85791016)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tfd7"]
-albedo_color = Color(0.8901961, 1, 0.24313726, 1)
+albedo_color = Color(1, 0.93333334, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyaam"]
 
@@ -22,19 +19,13 @@ albedo_color = Color(0.5975616, 0.62852186, 0.5881549, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wyaam"]
 size = Vector3(2.0341187, 1, 1.980957)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tfd7"]
+size = Vector3(1, 0.6054077, 0.89282227)
+
 [node name="Node3D" type="Node3D"]
 
-[node name="blaster-a" parent="." instance=ExtResource("1_s4osm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15129554, 0.67131054, -0.060767293)
-script = ExtResource("2_1tfd7")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="blaster-a"]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 0, -0.063056946, 0.03540039)
-shape = SubResource("BoxShape3D_1tfd7")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.37903216, -0.06349492, 0.9232026, -0.06682566, 0.9931605, 0.09574251, -0.9229677, -0.0979831, 0.37219664, 0.96208894, 0.5110775, 0.6274265)
-visible = false
+transform = Transform3D(0.15521044, 0, 0.9878814, 0, 1, 0, -0.9878814, 0, 0.15521044, 2.5669575, 0.956759, -0.06317127)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.314523)
@@ -54,3 +45,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_yamy5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.05, 0, 0, 0, 1, -0.018157959, 0, -0.0036621094)
 shape = SubResource("BoxShape3D_wyaam")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="blaster-a" parent="RigidBody3D" instance=ExtResource("1_s4osm")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.15129554, 0.42385375, -0.060767293)
+script = ExtResource("2_1tfd7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.571, 0, 0, 0, 0.571, 0.15129554, 0.3607968, -0.03409493)
+shape = SubResource("BoxShape3D_1tfd7")
