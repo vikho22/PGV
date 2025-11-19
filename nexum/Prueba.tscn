@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bts84bwus8t3s"]
+
+[ext_resource type="PackedScene" uid="uid://cbamc4hkrjmp6" path="res://Player/Player.tscn" id="1_7ucbv"]
+[ext_resource type="Script" uid="uid://bo7ba2w538tcx" path="res://prueba.gd" id="1_vnpk6"]
+[ext_resource type="PackedScene" uid="uid://dtd7s6kwdtikl" path="res://Enemies/zombie.tscn" id="2_0ri0x"]
+
+[sub_resource type="Environment" id="Environment_7ucbv"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0ri0x"]
+vertices = PackedVector3Array(-49.5, 0.101902485, -99.5, -49.5, 0.101902485, 99.5, 49.5, 0.101902485, 99.5, 49.5, 0.101902485, -99.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnpk6"]
+size = Vector3(100, 0, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgsii"]
+size = Vector3(100, 0, 200)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_vnpk6")
+
+[node name="Player" parent="." instance=ExtResource("1_7ucbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36973882, 0)
+
+[node name="Enemies" parent="." instance=ExtResource("2_0ri0x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.724897)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7ucbv")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_0ri0x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3976016, 0)
+mesh = SubResource("BoxMesh_vnpk6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39809752, 0)
+shape = SubResource("BoxShape3D_lgsii")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9998384, 0.017975923, 0, -0.017975923, 0.9998384, 0, 5.273518, 15.450027)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)

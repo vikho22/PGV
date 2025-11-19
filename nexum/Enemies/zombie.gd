@@ -9,24 +9,35 @@ var vida: float = 100
 var player_target : CharacterBody3D = null
 
 
-
 func _ready() -> void:
-	max_agent.target_desired_distance = 0.1
-	max_agent.path_desired_distance = 0.1
+	max_agent.target_desired_distance = 2
+	max_agent.path_desired_distance = 0.5
 	
 	set_movement_target_position(target_position)
 	
 
 func _physics_process(delta: float) -> void:
+	set_movement_target_position(player_target.position)
 	if max_agent.is_navigation_finished():
+		anim_zombie.play("attack-kick-left")
 		return
 	
 	var current_position = global_position
 	var init_path_position = max_agent.get_next_path_position()
+	var direction = current_position.direction_to(init_path_position)
 	
-	velocity = current_position.direction_to(init_path_position) * speed
 	
-	anim_zombie.play("walk")
+	# Normaliza para que la velocidad sea constante incluso en diagonal
+	if direction != Vector3.ZERO:
+		direction = direction.normalized()
+		# Calcula rotación hacia el movimiento
+		var target_rotation = atan2(direction.x, direction.z)
+		rotation.y = lerp_angle(rotation.y, target_rotation, 0.2)
+		anim_zombie.play("walk")
+
+
+	
+	velocity = direction * speed
 	move_and_slide()
 	
 
