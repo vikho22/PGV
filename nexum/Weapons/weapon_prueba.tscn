@@ -1,3 +1,56 @@
-[gd_scene format=3 uid="uid://est4dschv38q"]
+[gd_scene load_steps=10 format=3 uid="uid://est4dschv38q"]
+
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="1_s4osm"]
+[ext_resource type="Script" uid="uid://dai2ik7hubinq" path="res://Scripts/weapon_on_floor.gd" id="2_1tfd7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tfd7"]
+size = Vector3(1, 0.6054077, 0.85791016)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tfd7"]
+albedo_color = Color(0.8901961, 1, 0.24313726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyaam"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1tfd7"]
+material = SubResource("StandardMaterial3D_wyaam")
+
+[sub_resource type="Skin" id="Skin_h8ccp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yamy5"]
+albedo_color = Color(0.5975616, 0.62852186, 0.5881549, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wyaam"]
+size = Vector3(2.0341187, 1, 1.980957)
 
 [node name="Node3D" type="Node3D"]
+
+[node name="blaster-a" parent="." instance=ExtResource("1_s4osm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15129554, 0.67131054, -0.060767293)
+script = ExtResource("2_1tfd7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="blaster-a"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 0, -0.063056946, 0.03540039)
+shape = SubResource("BoxShape3D_1tfd7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.37903216, -0.06349492, 0.9232026, -0.06682566, 0.9931605, 0.09574251, -0.9229677, -0.0979831, 0.37219664, 0.96208894, 0.5110775, 0.6274265)
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.314523)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.8897314, 0.3025446, 0.48837662)
+material_override = SubResource("StandardMaterial3D_1tfd7")
+mesh = SubResource("PlaneMesh_1tfd7")
+skin = SubResource("Skin_h8ccp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yamy5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.05, 0, 0, 0, 1, -0.018157959, 0, -0.0036621094)
+shape = SubResource("BoxShape3D_wyaam")
