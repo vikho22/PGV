@@ -17,6 +17,7 @@ size = Vector3(100, 0, 200)
 size = Vector3(100, 0, 200)
 
 [node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5703173)
 script = ExtResource("1_vnpk6")
 
 [node name="Player" parent="." instance=ExtResource("1_7ucbv")]
@@ -42,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39809752, 0)
 shape = SubResource("BoxShape3D_lgsii")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9998384, 0.017975923, 0, -0.017975923, 0.9998384, 0, 5.273518, 15.450027)
+transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975926, 0, -0.017975925, 0.9998385, 0, 5.273518, 12.879987)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
