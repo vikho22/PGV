@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://yoi4rf2uucac"]
+
+[ext_resource type="Texture2D" uid="uid://c0idx5agt818e" path="res://Textures/texture-m.png" id="1_noarx"]
+[ext_resource type="ArrayMesh" uid="uid://2wgkhic646en" path="res://Models/character-a.obj" id="2_a0tk4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
+albedo_texture = ExtResource("1_noarx")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CharacterA" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_r3fl7")
+mesh = ExtResource("2_a0tk4")
