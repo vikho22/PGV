@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://est4dschv38q"]
+
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="1_s4osm"]
+[ext_resource type="Script" uid="uid://bo6dm5yj4jqgk" path="res://Scripts/weapon_on_floor.gd" id="2_1tfd7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tfd7"]
+size = Vector3(1, 0.6054077, 0.89282227)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="blaster-a" parent="RigidBody3D" instance=ExtResource("1_s4osm")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.15129554, 0.42385375, -0.060767293)
+script = ExtResource("2_1tfd7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.571, 0, 0, 0, 0.571, 0.15129554, 0.3607968, -0.03409493)
+shape = SubResource("BoxShape3D_1tfd7")
