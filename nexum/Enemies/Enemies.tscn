@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://33ymr3m82wgl"]
+[gd_scene load_steps=8 format=3 uid="uid://33ymr3m82wgl"]
 
 [ext_resource type="PackedScene" uid="uid://cirtd87bgt8r7" path="res://Models/character-l.fbx" id="1_m4rhk"]
 [ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="2_7toqp"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_5xe6q"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m4rhk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nckgq"]
 size = Vector3(1.5825195, 2.8605652, 1)
@@ -16,21 +18,24 @@ viewport_path = NodePath("SubViewport")
 [node name="character-l" instance=ExtResource("1_m4rhk")]
 script = ExtResource("2_7toqp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_m4rhk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12472522, 1.3234267, 0)
 shape = SubResource("BoxShape3D_nckgq")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="3"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4"]
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 
-[node name="DetectorJugador" type="Area3D" parent="." index="4"]
+[node name="DetectorJugador" type="Area3D" parent="." index="5"]
 collision_layer = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectorJugador" index="0"]
 shape = SubResource("SphereShape3D_b2mwl")
 
-[node name="Health" type="Node3D" parent="." index="5"]
+[node name="Health" type="Node3D" parent="." index="6"]
 transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86958975, 0.19753301, 2.8101664, 0.04342997)
 
 [node name="Sprite3D" parent="Health" index="0" instance=ExtResource("3_5xe6q")]
