@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxakgkyja58j3"]
+
+[ext_resource type="Script" uid="uid://mcl6615om88d" path="res://Player/healthbar.gd" id="1_l3c2n"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vte6m"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3lat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3lat"]
+bg_color = Color(0.85490197, 0, 0.05882353, 1)
+border_width_bottom = 3
+border_color = Color(0.5372549, 0.13333334, 0.14901961, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_bottom = 3.0
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tok1r"]
+bg_color = Color(0.09803922, 0.7176471, 0.14117648, 1)
+border_width_bottom = 3
+border_color = Color(0.06069903, 0.3097185, 0.109202765, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_bottom = 3.0
+
+[node name="Sprite3D" type="Sprite3D"]
+transform = Transform3D(0.8693225, 0, -0.49424535, 0, 1, 0, 0.49424535, 0, 0.8693225, 0, 0, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_vte6m")
+script = ExtResource("1_l3c2n")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(273, 32)
+
+[node name="Panel" type="Panel" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q3lat")
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.5
+anchor_right = 0.9620001
+anchor_bottom = 0.5
+offset_left = 0.007999897
+offset_top = -13.0
+offset_right = -0.0960083
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_q3lat")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tok1r")
+value = 100.0

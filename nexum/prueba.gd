@@ -6,5 +6,6 @@ extends Node3D
 
 func _ready() -> void:
 	enemies.player_target = player
+	enemies
 	pass
 	

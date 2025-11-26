@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtd7s6kwdtikl"]
+[gd_scene load_steps=7 format=3 uid="uid://dtd7s6kwdtikl"]
 
-[ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Enemies/zombie.gd" id="1_3p8yn"]
+[ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="1_3p8yn"]
 [ext_resource type="PackedScene" uid="uid://cirtd87bgt8r7" path="res://Models/character-l.fbx" id="1_7ss6f"]
+[ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_13ig7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3p8yn"]
 size = Vector3(1.5825195, 2.8605652, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_13ig7"]
-radius = 100.0
+radius = 8.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_d3phm"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Enemies" type="CharacterBody3D"]
 script = ExtResource("1_3p8yn")
@@ -28,3 +32,12 @@ collision_layer = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectorJugador"]
 shape = SubResource("SphereShape3D_13ig7")
+
+[node name="Health" type="Node3D" parent="."]
+transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86958975, 0.19753301, 2.8101664, 0.04342997)
+
+[node name="Sprite3D" parent="Health" instance=ExtResource("3_13ig7")]
+transform = Transform3D(0.51190794, 0, -0.85904044, 0, 1, 0, 0.85904044, 0, 0.51190794, -0.07585975, 0.22703838, -0.09301813)
+texture = SubResource("ViewportTexture_d3phm")
+
+[connection signal="no_hp_left" from="Health/Sprite3D" to="." method="_on_sprite_3d_no_hp_left"]

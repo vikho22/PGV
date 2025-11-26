@@ -23,5 +23,3 @@ transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86
 [node name="Sprite3D" parent="Health" instance=ExtResource("3_tok1r")]
 transform = Transform3D(0.8693225, 0, -0.49424535, 0, 1, 0, 0.49424535, 0, 0.8693225, -0.33689624, 0.20813084, 0.3469968)
 texture = SubResource("ViewportTexture_ddoul")
-
-[connection signal="no_hp_left" from="Health/Sprite3D" to="." method="_on_sprite_3d_no_hp_left"]
