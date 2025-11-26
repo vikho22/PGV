@@ -1,36 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://bts84bwus8t3s"]
+[gd_scene load_steps=8 format=3 uid="uid://bts84bwus8t3s"]
 
-[ext_resource type="Script" uid="uid://cg50evqwt0egn" path="res://character_body_3d.gd" id="1_0ri0x"]
-[ext_resource type="PackedScene" uid="uid://cmf4pg881fkvu" path="res://Models/character-e.fbx" id="1_7ucbv"]
+[ext_resource type="PackedScene" uid="uid://bg683c8ck4plt" path="res://Player/Player.tscn" id="1_7ucbv"]
+[ext_resource type="Script" uid="uid://bo7ba2w538tcx" path="res://prueba.gd" id="1_vnpk6"]
+[ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/Zombie.tscn" id="3_vnpk6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0ri0x"]
-size = Vector3(1.6055832, 2.7099915, 0.80444336)
+[sub_resource type="Environment" id="Environment_7ucbv"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vnpk6"]
-size = Vector3(42.626114, 0.20361328, 60.834045)
+[sub_resource type="NavigationMesh" id="NavigationMesh_0ri0x"]
+vertices = PackedVector3Array(-49.5, 0.101902485, -99.5, -49.5, 0.101902485, 99.5, 49.5, 0.101902485, 99.5, 49.5, 0.101902485, -99.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnpk6"]
+size = Vector3(100, 0, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgsii"]
+size = Vector3(100, 0, 200)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_vnpk6")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("1_0ri0x")
+[node name="Player" parent="." instance=ExtResource("1_7ucbv")]
 
-[node name="character-e" parent="CharacterBody3D" instance=ExtResource("1_7ucbv")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10105801, 0, -0.018547058)
+[node name="Zombie" parent="." instance=ExtResource("3_vnpk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16821384, -13.299497)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10090256, 1.351181, -0.014770508)
-shape = SubResource("BoxShape3D_0ri0x")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7ucbv")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_0ri0x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3976016, 0)
+mesh = SubResource("BoxMesh_vnpk6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39809752, 0)
+shape = SubResource("BoxShape3D_lgsii")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9574305, 0.2886642, 0, -0.2886642, 0.9574305, 0, 2.5698676, 4.3239827)
+transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975925, 0, -0.017975925, 0.9998385, 0, 5.273518, 7.8683043)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.8595046, 0.035173927, 0.50991637, 0, 0.9976294, -0.06881627, -0.51112807, 0.059147898, 0.857467, 5.3933783, 0, 2.9306774)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0456314, -0.39819336, -22.085846)
-shape = SubResource("BoxShape3D_vnpk6")
+transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
