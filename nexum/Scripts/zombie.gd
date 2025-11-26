@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var max_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var anim_zombie = $"zombie/AnimationPlayer"
+@onready var anim_zombie = $AnimationPlayer
 @onready var barra_vida = $Health/Sprite3D/SubViewport/Panel/ProgressBar
 @export var speed = 2.0
 @export  var target_position = Vector3(0,1,0)

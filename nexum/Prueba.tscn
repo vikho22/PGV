@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bts84bwus8t3s"]
 
-[ext_resource type="PackedScene" uid="uid://cbamc4hkrjmp6" path="res://Player/Player.tscn" id="1_7ucbv"]
+[ext_resource type="PackedScene" uid="uid://bg683c8ck4plt" path="res://Player/Player.tscn" id="1_7ucbv"]
 [ext_resource type="Script" uid="uid://bo7ba2w538tcx" path="res://prueba.gd" id="1_vnpk6"]
-[ext_resource type="PackedScene" uid="uid://dtd7s6kwdtikl" path="res://Enemies/zombie.tscn" id="2_0ri0x"]
+[ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/Zombie.tscn" id="3_vnpk6"]
 
 [sub_resource type="Environment" id="Environment_7ucbv"]
 
@@ -20,10 +20,9 @@ size = Vector3(100, 0, 200)
 script = ExtResource("1_vnpk6")
 
 [node name="Player" parent="." instance=ExtResource("1_7ucbv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36973882, 0)
 
-[node name="Enemies" parent="." instance=ExtResource("2_0ri0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.724897)
+[node name="Zombie" parent="." instance=ExtResource("3_vnpk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16821384, -13.299497)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7ucbv")

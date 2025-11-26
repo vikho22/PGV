@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var anim_player = $"character-d/AnimationPlayer"
+@onready var anim_player = $AnimationPlayer
 
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 4.5
@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	# Aplicar gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
