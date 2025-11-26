@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://33ymr3m82wgl"]
 
-[ext_resource type="PackedScene" uid="uid://cirtd87bgt8r7" path="res://Models/character-l.fbx" id="1_m4rhk"]
+[ext_resource type="PackedScene" uid="uid://cp60x67lsrlss" path="res://Models/character-l.fbx" id="1_m4rhk"]
 [ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="2_7toqp"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_5xe6q"]
 

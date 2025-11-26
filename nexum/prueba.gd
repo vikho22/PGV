@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var player = $Player
-@onready var enemies = $"character-l"
+@onready var enemies = $Zombie
 
 
 func _ready() -> void:
