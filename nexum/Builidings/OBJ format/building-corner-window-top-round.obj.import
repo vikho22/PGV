@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://w3x6ttjsroyb"
+path="res://.godot/imported/building-corner-window-top-round.obj-dd68c3931e7e8d77c1001b70e0563a6f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building-corner-window-top-round.obj-dd68c3931e7e8d77c1001b70e0563a6f.mesh"]
+
+source_file="res://Builidings/OBJ format/building-corner-window-top-round.obj"
+dest_files=["res://.godot/imported/building-corner-window-top-round.obj-dd68c3931e7e8d77c1001b70e0563a6f.mesh", "res://.godot/imported/building-corner-window-top-round.obj-dd68c3931e7e8d77c1001b70e0563a6f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
