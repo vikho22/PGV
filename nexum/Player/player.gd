@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var anim_player = $"character-d/AnimationPlayer"
+@onready var anim_player = $AnimationPlayer
 
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 4.5

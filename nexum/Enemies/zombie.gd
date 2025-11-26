@@ -19,7 +19,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	set_movement_target_position(player_target.position)
 	if max_agent.is_navigation_finished():
-		anim_zombie.play("attack-kick-left")
+		anim_zombie.play("attack-melee-left")
 		return
 	
 	var current_position = global_position
