@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="res://Healing/healing_element_test.tscn"
 
+[dotnet]
+
+project/assembly_name="NEXUM"
+
 [input]
 
 left={
