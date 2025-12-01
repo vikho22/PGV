@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://df7lrilkv2kmd"
+path="res://.godot/imported/building-window-left.obj-b7078951ba0e68adcf47b9356b149bac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building-window-left.obj-b7078951ba0e68adcf47b9356b149bac.mesh"]
+
+source_file="res://Builidings/OBJ format/building-window-left.obj"
+dest_files=["res://.godot/imported/building-window-left.obj-b7078951ba0e68adcf47b9356b149bac.mesh", "res://.godot/imported/building-window-left.obj-b7078951ba0e68adcf47b9356b149bac.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
