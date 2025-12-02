@@ -1,7 +1,6 @@
-[gd_scene load_steps=76 format=3 uid="uid://bts84bwus8t3s"]
+[gd_scene load_steps=75 format=3 uid="uid://bts84bwus8t3s"]
 
-[ext_resource type="Script" uid="uid://cg50evqwt0egn" path="res://character_body_3d.gd" id="1_xxfo4"]
-[ext_resource type="PackedScene" uid="uid://c2h6uxqrqvj1t" path="res://Models/character-e.fbx" id="2_o40lc"]
+[ext_resource type="PackedScene" uid="uid://cjkwglwxcne11" path="res://Models/character-e.fbx" id="2_o40lc"]
 [ext_resource type="PackedScene" uid="uid://ifmcqu2v04kb" path="res://Urban/detail-dumpster-open.glb" id="3_k4ykr"]
 [ext_resource type="ArrayMesh" uid="uid://b3se5vo1il5qp" path="res://Urban/OBJ format/detail-dumpster-open.obj" id="4_frnj1"]
 [ext_resource type="PackedScene" uid="uid://doc0ue4upjhmd" path="res://Urban/grass.glb" id="5_r1glc"]
@@ -132,7 +131,6 @@ data = PackedVector3Array(0.1679, 0, 0.1361, 0.235, 0.1506, 0.0861, 0.235, 0, 0.
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 5.066409, 0.26448786, 1.5008575)
-script = ExtResource("1_xxfo4")
 
 [node name="character-e" parent="CharacterBody3D" instance=ExtResource("2_o40lc")]
 unique_name_in_owner = true

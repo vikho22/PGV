@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://xol32lvrlo1d"]
+
+[ext_resource type="Script" uid="uid://ih167ln0o8db" path="res://Scripts/healing_element_on_floor.gd" id="1_446ii"]
+[ext_resource type="PackedScene" uid="uid://b1h0nhtfmexp8" path="res://Healing/apple.fbx" id="2_7mmqw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iqaye"]
+radius = 0.115188815
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mw3en"]
+radius = 0.13786598
+
+[node name="Apple" type="Node3D"]
+
+[node name="Apple" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012207031, -0.023228884, 0)
+script = ExtResource("1_446ii")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.0054017305, 0.30066508, -0.0056396425)
+shape = SubResource("SphereShape3D_iqaye")
+
+[node name="apple" parent="Apple" instance=ExtResource("2_7mmqw")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Apple"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apple/Area3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.3416443, 0)
+shape = SubResource("SphereShape3D_mw3en")
+
+[connection signal="body_entered" from="Apple" to="Apple" method="_on_body_entered"]
+[connection signal="mouse_entered" from="Apple" to="Apple" method="_on_mouse_entered"]
