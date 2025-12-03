@@ -63,3 +63,7 @@ func take_damage(has: bool):
 
 func _on_sprite_3d_no_hp_left() -> void:
 	queue_free()
+
+func heal(amount: float) -> void:
+	current_health = min(current_health + amount, max_health)
+	$Health/Sprite3D.heal(amount)

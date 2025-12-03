@@ -28,5 +28,9 @@ func _on_Area3D_body_entered(body: Node) -> void:
 		return
 	if body is CharacterBody3D:
 		activated = true
+		
+		if body.has_method("heal"):
+			body.heal(25)
+			
 		await get_tree().create_timer(1.0).timeout
 		queue_free()

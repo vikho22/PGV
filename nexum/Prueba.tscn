@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bts84bwus8t3s"]
+[gd_scene load_steps=9 format=3 uid="uid://bts84bwus8t3s"]
 
 [ext_resource type="PackedScene" uid="uid://dkep3cjgp021n" path="res://Player/Player.tscn" id="1_7ucbv"]
-[ext_resource type="Script" path="res://prueba.gd" id="1_vnpk6"]
+[ext_resource type="Script" uid="uid://bo7ba2w538tcx" path="res://prueba.gd" id="1_vnpk6"]
 [ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/zombie.tscn" id="3_vnpk6"]
+[ext_resource type="PackedScene" uid="uid://xol32lvrlo1d" path="res://Healing/Scenes/apple.tscn" id="4_lgsii"]
 
 [sub_resource type="Environment" id="Environment_7ucbv"]
 
@@ -45,3 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975925, 0, -0.017975925, 0.9
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
+
+[node name="Apple" parent="." instance=ExtResource("4_lgsii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.871033, -0.37486863, -7.187866)

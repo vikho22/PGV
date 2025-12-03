@@ -18,3 +18,12 @@ func take_damage(damage: float):
 	
 	if real_value <= 0.1:
 		no_hp_left.emit()
+		
+		
+
+func heal(healing: float):
+	real_value += healing
+	real_value = min(real_value, max_hp)
+	
+	create_tween().tween_property($SubViewport/Panel/ProgressBar,"value",real_value,0.3)
+	
