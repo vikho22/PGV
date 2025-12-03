@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0qrhhgh11f8p"]
+
+[ext_resource type="Script" uid="uid://bo6dm5yj4jqgk" path="res://Scripts/weapon_on_floor.gd" id="1_34ncq"]
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="1_yvbtn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_34ncq"]
+radius = 1.2642677
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yvbtn"]
+size = Vector3(0.59578323, 0.79467773, 1.3240356)
+
+[node name="RigidBody3D" type="RigidBody3D"]
+script = ExtResource("1_34ncq")
+
+[node name="blaster-a" parent="." instance=ExtResource("1_yvbtn")]
+
+[node name="blaster-a" parent="blaster-a" index="0"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="blaster-a"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="blaster-a/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.070251465, -0.06274414, -0.1240387)
+shape = SubResource("SphereShape3D_34ncq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002626419, -0.056274414, 0.013031006)
+shape = SubResource("BoxShape3D_yvbtn")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+pixel_size = 0.01
+billboard = 1
+modulate = Color(0.09411765, 0, 1, 1)
+text = "Pulsa E"
+
+[connection signal="body_entered" from="blaster-a/Area3D" to="." method="_on_area_entrada"]
+[connection signal="body_exited" from="blaster-a/Area3D" to="." method="_on_area_salida"]
+
+[editable path="blaster-a"]

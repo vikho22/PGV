@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cagmutqjuh8i2"]
+[gd_scene load_steps=9 format=3 uid="uid://chtb1doikgbsg"]
 
-[ext_resource type="PackedScene" uid="uid://dkep3cjgp021n" path="res://Player/Player.tscn" id="1_7ucbv"]
-[ext_resource type="Script" path="res://prueba.gd" id="1_vnpk6"]
-[ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/zombie.tscn" id="3_vnpk6"]
+[ext_resource type="Script" path="res://prueba.gd" id="1_aluy0"]
+[ext_resource type="PackedScene" uid="uid://dkep3cjgp021n" path="res://Player/Player.tscn" id="2_2ow0r"]
+[ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/zombie.tscn" id="3_if5su"]
+[ext_resource type="PackedScene" uid="uid://b0qrhhgh11f8p" path="res://Weapons/Scenes/weapon.tscn" id="4_2ow0r"]
 
 [sub_resource type="Environment" id="Environment_7ucbv"]
 
@@ -17,22 +18,12 @@ size = Vector3(100, 0, 200)
 size = Vector3(100, 0, 200)
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_vnpk6")
+script = ExtResource("1_aluy0")
 
-[node name="Player" parent="." instance=ExtResource("1_7ucbv")]
+[node name="Player" parent="." instance=ExtResource("2_2ow0r")]
+SPEED = 4.0
 
-[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.8660253, 0, 2.6419306, 1.460146)
-top_level = true
-spring_length = 10.0
-
-[node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
-transform = Transform3D(0.9975372, 9.29029e-09, -0.0701395, 0, 1, 1.4901161e-07, 0.0701395, -1.1920929e-07, 0.99753726, 0, 4.9591155, 4.59853)
-projection = 1
-size = 15.0
-
-[node name="Zombie" parent="." instance=ExtResource("3_vnpk6")]
+[node name="Zombie" parent="." instance=ExtResource("3_if5su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16821384, -13.299497)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -56,3 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975925, 0, -0.017975925, 0.9
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
+
+[node name="RigidBody3D" parent="." instance=ExtResource("4_2ow0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.031486, -0.095146656, -2.0508287)

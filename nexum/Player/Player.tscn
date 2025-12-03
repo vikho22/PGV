@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkep3cjgp021n"]
+[gd_scene load_steps=7 format=3 uid="uid://dkep3cjgp021n"]
 
-[ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://crasywkns4el2" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="3_ddoul"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
-size = Vector3(1.5493164, 3.274292, 1)
+size = Vector3(1.5493164, 3.4638062, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
 viewport_path = NodePath("SubViewport")
@@ -13,8 +14,18 @@ viewport_path = NodePath("SubViewport")
 [node name="character-d" instance=ExtResource("1_xhfnw")]
 script = ExtResource("2_tok1r")
 
+[node name="arm-right" parent="character-d/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.4000001, 1.1, -0.099999994)
+
+[node name="blaster-a" parent="character-d/root/torso/arm-right" index="0" instance=ExtResource("3_ddoul")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -0.35632002, -0.9428272, 0.42479837)
+visible = false
+
+[node name="PuntoDisparo" type="Marker3D" parent="character-d/root/torso/arm-right/blaster-a" index="1"]
+transform = Transform3D(1, 0, 0, -1.276624e-36, 1.0780923, 0, 0, 0, 1.7892201, 0, 0, -0.35)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02368164, 1.8370986, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02368164, 1.7423415, 0)
 shape = SubResource("BoxShape3D_ddoul")
 
 [node name="Health" type="Node3D" parent="." index="3"]

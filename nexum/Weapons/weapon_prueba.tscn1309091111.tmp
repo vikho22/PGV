@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://est4dschv38q"]
+
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="1_s4osm"]
+[ext_resource type="Script" uid="uid://dai2ik7hubinq" path="res://Scripts/weapon_on_floor.gd" id="2_1tfd7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1tfd7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wyaam"]
+size = Vector3(2.0341187, 1, 1.980957)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="blaster-a" parent="." instance=ExtResource("1_s4osm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15129554, 0.3801348, -0.060767293)
+script = ExtResource("2_1tfd7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.82001203, 0, 0.57234627, -0.066825666, 0.9931605, 0.09574248, -0.5684317, -0.11675741, 0.81440353, 0.54024935, 0.13700992, 1.1961861)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.314523)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1tfd7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018157959, 0, -0.0036621094)
+shape = SubResource("BoxShape3D_wyaam")

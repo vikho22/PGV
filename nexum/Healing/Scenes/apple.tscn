@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://xol32lvrlo1d"]
 
-[ext_resource type="Script" uid="uid://ih167ln0o8db" path="res://Scripts/healing_element_on_floor.gd" id="1_446ii"]
+[ext_resource type="Script" path="res://Scripts/healing_element_on_floor.gd" id="1_446ii"]
 [ext_resource type="PackedScene" uid="uid://b1h0nhtfmexp8" path="res://Healing/apple.fbx" id="2_7mmqw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iqaye"]
