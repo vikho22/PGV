@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var heal_amount: float = 25.0
+@export var shield_amount: float = 25.0
 var rotation_speed: float = 1.5
 var max_rotation_speed: float = 20.0
 var acceleration: float = 30.0
@@ -30,8 +30,8 @@ func _on_Area3D_body_entered(body: Node) -> void:
 	if body is CharacterBody3D:
 		activated = true
 		
-		if body.has_method("heal"):
-			body.heal(heal_amount)
+		if body.has_method("get_shield"):
+			body.get_shield(shield_amount)
 			
 		await get_tree().create_timer(1.0).timeout
 		queue_free()

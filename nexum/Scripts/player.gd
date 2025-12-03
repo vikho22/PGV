@@ -8,6 +8,8 @@ extends CharacterBody3D
 #Variables de vida:
 var max_health: float = 100.0
 var current_health: float = 100.0
+var max_shield: float = 100.0
+var current_shield: float = 0.0
 var can_take_damage = true
 var damage_timeout = 1.0
 
@@ -55,15 +57,37 @@ func take_damage(has: bool):
 	if can_take_damage and has:
 		for i in range(get_slide_collision_count()):
 			if get_slide_collision(i).get_collider() is CharacterBody3D:
-				$Health/Sprite3D.take_damage(10)
+				var damage := 10
+
+				var shield := $DataBars/Shield/Sprite3D
+				var health := $DataBars/Health/Sprite3D
+				
+				
+				if shield.real_value > 0:
+					shield.take_damage(damage)
+
+					if shield.real_value <= 0:
+						var leftover = -shield.real_value
+						if leftover > 0:
+							health.take_damage(leftover)
+
+				else:
+					health.take_damage(damage)
+				
 				can_take_damage = false
 				await get_tree().create_timer(damage_timeout).timeout
 				can_take_damage = true
 				break
+				
+				
 
 func _on_sprite_3d_no_hp_left() -> void:
 	queue_free()
 
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
-	$Health/Sprite3D.heal(amount)
+	$DataBars/Health/Sprite3D.heal(amount)
+	
+func get_shield(amount: float) -> void:
+	current_shield = min(current_shield + amount, max_shield)
+	$DataBars/Shield/Sprite3D.get_shield(amount)
