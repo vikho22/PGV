@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnbfuol0lhh8l"]
+
+[ext_resource type="Script" path="res://mainMenu.gd" id="1_h7a2f"]
+[ext_resource type="Texture2D" path="res://Images/Cover.jpg" id="1_i26rj"]
+[ext_resource type="AudioStream" path="res://Music/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3" id="2_eiy7p"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h7a2f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i26rj")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_eiy7p")
+volume_db = 24.0
+autoplay = true
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 58.0
+offset_top = -381.0
+offset_right = 1241.0
+offset_bottom = 379.0
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 335.0
+offset_right = 296.0
+offset_bottom = 410.0
+size_flags_vertical = 2
+text = "
+"
+flat = true
+alignment = 2
+
+[node name="Tutorial" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 453.0
+offset_right = 299.0
+offset_bottom = 527.0
+size_flags_vertical = 2
+flat = true
+
+[node name="Logros" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 582.0
+offset_right = 301.0
+offset_bottom = 655.0
+size_flags_vertical = 8
+flat = true
+
+[node name="Music" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 2.0
+offset_right = 1081.0
+offset_bottom = 55.0
+flat = true
+
+[node name="Settings" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 1103.0
+offset_top = 2.0
+offset_right = 1159.0
+offset_bottom = 57.0
+flat = true
