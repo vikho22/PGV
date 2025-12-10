@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
-@export var SPEED = 2.0
-@export var JUMP_VELOCITY = 2.5
+@export var SPEED = 4.0
+@export var JUMP_VELOCITY = 5.5
 
 #Variables de vida:
 var max_health: float = 100.0
