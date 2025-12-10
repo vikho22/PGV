@@ -18,11 +18,10 @@ size = Vector3(100, 0, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgsii"]
 size = Vector3(100, 0, 200)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 script = ExtResource("1_vnpk6")
 
 [node name="Player" parent="." instance=ExtResource("1_7ucbv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0038757324, 0)
 
 [node name="Zombie" parent="." instance=ExtResource("3_vnpk6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16821384, -13.299497)
@@ -31,7 +30,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16821384, -13.299497)
 environment = SubResource("Environment_7ucbv")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009460449, -0.25612307, 0)
 navigation_mesh = SubResource("NavigationMesh_0ri0x")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
@@ -51,7 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975925, 0, -0.017975925, 0.9
 transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
 
 [node name="Apple" parent="." instance=ExtResource("4_lgsii")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.871033, -0.37486863, -7.187866)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1936646, -0.3748381, -8.659912)
 
 [node name="Bottle" parent="." instance=ExtResource("5_wgwtc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.201233, -0.6309917, -2.7098389)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.568863, -0.37486863, -8.025635)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjw6ktfpi2vit"]
 
-[ext_resource type="Script" uid="uid://cdka1j6xndsfy" path="res://Scripts/shield_on_floor.gd" id="1_wefo7"]
+[ext_resource type="Script" path="res://Scripts/shield_on_floor.gd" id="1_wefo7"]
 [ext_resource type="PackedScene" uid="uid://dwv52bgnmwdur" path="res://Healing/bottle-oil.fbx" id="2_gicx8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ysnvc"]
@@ -15,6 +15,8 @@ height = 1.5238037
 
 [node name="Botella" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012207031, -0.023228884, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_wefo7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Botella"]
@@ -25,6 +27,8 @@ shape = SubResource("CylinderShape3D_ysnvc")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.004841566, 0, 0.00856185)
 
 [node name="Area3D" type="Area3D" parent="Botella"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Botella/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.9999247, 0.012269356, 0, -0.012269356, 0.9999247, 0, 0.58221436, 0)
