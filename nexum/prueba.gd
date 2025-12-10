@@ -3,7 +3,7 @@ extends Node3D
 @onready var player = $Player
 @onready var enemies = $Zombie
 
-@onready var cameras := [$Camera1, $Camera2]
+@onready var cameras := [$Camera3D, $Camera3D2]
 @onready var current_index := 0
 
 func switch_camera():
