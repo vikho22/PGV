@@ -4,6 +4,8 @@ extends Control
 @onready var jugar_button: Button = $Buttons/Play
 @onready var tutorial_button: Button = $Buttons/Tutorial
 @onready var logros_button: Button = $Buttons/Logros
+@onready var music_button: Button = $Buttons/Music
+@onready var setting_button: Button = $Buttons/Settings
 
 func _ready() -> void:
 	
