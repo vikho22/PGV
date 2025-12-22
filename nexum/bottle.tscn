@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bggsfcff3ambw"]
+
+[ext_resource type="PackedScene" uid="uid://dwv52bgnmwdur" path="res://Healing/bottle-oil.fbx" id="2_skn5d"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6k8ux"]
+height = 0.70892334
+radius = 0.12060547
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xiyir"]
+radius = 0.32373047
+height = 1.6827087
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.011627197, 0.62677, 0.021606445)
+shape = SubResource("CylinderShape3D_6k8ux")
+
+[node name="bottle-oil" parent="." instance=ExtResource("2_skn5d")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.004841566, 0, 0.00856185)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9999247, 0.012269356, 0, -0.012269356, 0.9999247, -0.011204898, 0.5531667, -0.011378169)
+shape = SubResource("CapsuleShape3D_xiyir")

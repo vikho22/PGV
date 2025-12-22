@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="res://Healing/healing_element_test.tscn"
 
+[autoload]
+
+Keybinds="*res://Scripts/KeyBinds.gd"
+
 [display]
 
 window/size/viewport_width=1228
