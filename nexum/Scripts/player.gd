@@ -76,10 +76,10 @@ func _physics_process(delta: float) -> void:
 		rotation.y = lerp_angle(rotation.y, target_rotation, 0.2)
 		
 	camera.top_level = true 
-	camera.global_position = global_position + Vector3(0, 10,5)
+	camera.global_position = global_position + Vector3(0, 15, 5)
 	
 	camera.global_rotation.y = deg_to_rad(0) 
-	camera.global_rotation.x = deg_to_rad(-45) 
+	camera.global_rotation.x = deg_to_rad(-60) 
 	
 	var horizontal_velocity = direction * SPEED
 	velocity.x = horizontal_velocity.x
