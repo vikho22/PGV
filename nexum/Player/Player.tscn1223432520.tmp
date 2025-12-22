@@ -1,0 +1,87 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkep3cjgp021n"]
+
+[ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
+[ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
+size = Vector3(1.5493164, 3.274292, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tok1r"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ddoul"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8g4oa"]
+animation = &"sprint"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_6ysni"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_tok1r")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_ddoul")
+blend_point_1/pos = Vector2(0.3, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_8g4oa")
+blend_point_2/pos = Vector2(-0.3, -1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vlldt"]
+animation = &"attack-melee-left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s1rgi"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j23h2"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j2ni"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v0k0e"]
+states/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_6ysni")
+states/BlendSpace2D/position = Vector2(378, 163)
+states/attack-melee-left/node = SubResource("AnimationNodeAnimation_vlldt")
+states/attack-melee-left/position = Vector2(372, 68)
+transitions = ["Start", "BlendSpace2D", SubResource("AnimationNodeStateMachineTransition_s1rgi"), "BlendSpace2D", "attack-melee-left", SubResource("AnimationNodeStateMachineTransition_j23h2"), "attack-melee-left", "BlendSpace2D", SubResource("AnimationNodeStateMachineTransition_0j2ni")]
+
+[node name="character-d" instance=ExtResource("1_xhfnw")]
+script = ExtResource("2_tok1r")
+
+[node name="root" parent="character-d" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018806335, 0)
+
+[node name="leg-left" parent="character-d/root" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9946002, -0.10378096, 0, 0.10378096, 0.9946002, 0.2, 1, 2.0348877e-14)
+
+[node name="leg-right" parent="character-d/root" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9946002, 0.10378089, 0, -0.10378089, 0.9946002, -0.2, 1, 2.183782e-14)
+
+[node name="torso" parent="character-d/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.99905205, -0.043532204, 0, 0.043532204, 0.99905205, 0, 0.7, 0)
+
+[node name="arm-left" parent="character-d/root/torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.98631024, 0.16490027, 0, -0.16490027, 0.98631024, 0.39999998, 1.1, -0.099999994)
+
+[node name="arm-right" parent="character-d/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.98359907, -0.1803687, 0, 0.1803687, 0.98359907, -0.4000001, 1.1, -0.099999994)
+
+[node name="head" parent="character-d/root/torso" index="2"]
+transform = Transform3D(0.099988595, 6.179464e-05, -0.0015089742, 0, 0.09991626, 0.0040917117, 0.001510239, -0.0040912456, 0.09990486, 0, 1.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02368164, 1.8370986, 0)
+shape = SubResource("BoxShape3D_ddoul")
+
+[node name="Health" type="Node3D" parent="." index="3"]
+transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86958975, 0.19753301, 2.8101664, 0.04342997)
+
+[node name="Sprite3D" parent="Health" index="0" instance=ExtResource("3_tok1r")]
+transform = Transform3D(0.8693225, 0, -0.49424535, 0, 1, 0, 0.49424535, 0, 0.8693225, -0.33689624, 0.20813084, 0.3469968)
+texture = SubResource("ViewportTexture_8g4oa")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource("AnimationNodeStateMachine_v0k0e")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendSpace2D/blend_position = Vector2(-0.0063796043, 1.2152467)
