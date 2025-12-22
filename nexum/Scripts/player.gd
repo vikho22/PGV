@@ -5,12 +5,14 @@ extends CharacterBody3D
 @onready var state_machine = anim_tree.get("parameters/playback")
 @onready var camera = $Camera3D
 
-@export var SPEED = 5.0
-@export var JUMP_VELOCITY = 4.5
+@export var SPEED = 4.0
+@export var JUMP_VELOCITY = 5.5
 
 #Variables de vida:
 var max_health: float = 100.0
 var current_health: float = 100.0
+var max_shield: float = 100.0
+var current_shield: float = 0.0
 var can_take_damage = true
 var damage_timeout = 1.0
 var weapon = null
@@ -101,11 +103,29 @@ func take_damage(has: bool):
 	if can_take_damage and has:
 		for i in range(get_slide_collision_count()):
 			if get_slide_collision(i).get_collider() is CharacterBody3D:
-				$Health/Sprite3D.take_damage(10)
+				var damage := 10
+
+				var shield := $DataBars/Shield/Sprite3D
+				var health := $DataBars/Health/Sprite3D
+				
+				
+				if shield.real_value > 0:
+					shield.take_damage(damage)
+
+					if shield.real_value <= 0:
+						var leftover = -shield.real_value
+						if leftover > 0:
+							health.take_damage(leftover)
+
+				else:
+					health.take_damage(damage)
+				
 				can_take_damage = false
 				await get_tree().create_timer(damage_timeout).timeout
 				can_take_damage = true
 				break
+				
+				
 
 func _on_sprite_3d_no_hp_left() -> void:
 	queue_free()
@@ -119,3 +139,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				state_machine.travel("attack")
 			else:
 				state_machine.travel("shoot")
+
+func heal(amount: float) -> void:
+	current_health = min(current_health + amount, max_health)
+	$DataBars/Health/Sprite3D.heal(amount)
+	
+func get_shield(amount: float) -> void:
+	current_shield = min(current_shield + amount, max_shield)
+	$DataBars/Shield/Sprite3D.get_shield(amount)

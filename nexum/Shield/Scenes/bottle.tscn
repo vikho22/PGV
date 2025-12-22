@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjw6ktfpi2vit"]
+
+[ext_resource type="Script" path="res://Scripts/shield_on_floor.gd" id="1_wefo7"]
+[ext_resource type="PackedScene" uid="uid://dwv52bgnmwdur" path="res://Healing/bottle-oil.fbx" id="2_gicx8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ysnvc"]
+height = 0.70892334
+radius = 0.07080078
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37nty"]
+radius = 0.24902344
+height = 1.5238037
+
+[node name="Bottle" type="Node3D"]
+
+[node name="Botella" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012207031, -0.023228884, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_wefo7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Botella"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.011627197, 0.62677, 0.021606445)
+shape = SubResource("CylinderShape3D_ysnvc")
+
+[node name="bottle-oil" parent="Botella" instance=ExtResource("2_gicx8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.004841566, 0, 0.00856185)
+
+[node name="Area3D" type="Area3D" parent="Botella"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Botella/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9999247, 0.012269356, 0, -0.012269356, 0.9999247, 0, 0.58221436, 0)
+shape = SubResource("CapsuleShape3D_37nty")
+
+[connection signal="body_entered" from="Botella" to="Botella" method="_on_body_entered"]
+[connection signal="mouse_entered" from="Botella" to="Botella" method="_on_mouse_entered"]
