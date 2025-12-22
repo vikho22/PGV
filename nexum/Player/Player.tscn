@@ -1,20 +1,100 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkep3cjgp021n"]
+[gd_scene load_steps=21 format=3 uid="uid://dkep3cjgp021n"]
 
 [ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
-size = Vector3(1.5493164, 3.274292, 1)
+size = Vector3(1.6169434, 2.7216644, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tok1r"]
+filter_enabled = true
+filters = ["character-d/root/torso/arm-left", "character-d/root/torso/arm-right"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ddoul"]
+animation = &"holding-left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8g4oa"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ysni"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vlldt"]
+animation = &"sprint"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_s1rgi"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_8g4oa")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_6ysni")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_vlldt")
+blend_point_2/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j23h2"]
+graph_offset = Vector2(-358.41556, 272.59113)
+nodes/output/position = Vector2(720, 180)
+nodes/Movement/node = SubResource("AnimationNodeBlendSpace2D_s1rgi")
+nodes/Movement/position = Vector2(60, 200)
+nodes/HoldWeapon/node = SubResource("AnimationNodeAnimation_ddoul")
+nodes/HoldWeapon/position = Vector2(260, 320)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_tok1r")
+nodes/Blend2/position = Vector2(500, 140)
+node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"Movement", &"Blend2", 1, &"HoldWeapon"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tok1r"]
+animation = &"attack-melee-left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s1rgi"]
+animation = &"holding-left-shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j2ni"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ddoul"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8g4oa"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j23h2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0k0e"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tok1r"]
+states/BlendTree/node = SubResource("AnimationNodeBlendTree_j23h2")
+states/BlendTree/position = Vector2(435, 100)
+states/attack/node = SubResource("AnimationNodeAnimation_tok1r")
+states/attack/position = Vector2(328, 197)
+states/shoot/node = SubResource("AnimationNodeAnimation_s1rgi")
+states/shoot/position = Vector2(537, 197)
+transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_0j2ni"), "BlendTree", "attack", SubResource("AnimationNodeStateMachineTransition_ddoul"), "attack", "BlendTree", SubResource("AnimationNodeStateMachineTransition_8g4oa"), "BlendTree", "shoot", SubResource("AnimationNodeStateMachineTransition_j23h2"), "shoot", "BlendTree", SubResource("AnimationNodeStateMachineTransition_v0k0e")]
+
 [node name="character-d" instance=ExtResource("1_xhfnw")]
 script = ExtResource("2_tok1r")
 
+[node name="torso" parent="character-d/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.9998588, -0.016800245, 0, 0.016800245, 0.9998588, 0, 0.7, 0)
+
+[node name="arm-left" parent="character-d/root/torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9627404, 0.27042726, 0, -0.27042726, 0.9627404, 0.39999998, 1.1, -0.099999994)
+
+[node name="arm-right" parent="character-d/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9991872, -0.040311564, 0, 0.040311564, 0.9991872, -0.4000001, 1.1, -0.099999994)
+
+[node name="head" parent="character-d/root/torso" index="2"]
+transform = Transform3D(0.099873, 0, -0.005038177, 0, 0.1, 0, 0.005038177, 0, 0.099873, 0, 1.2, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02368164, 1.8370986, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0)
 shape = SubResource("BoxShape3D_ddoul")
 
 [node name="Health" type="Node3D" parent="." index="3"]
@@ -23,3 +103,12 @@ transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86
 [node name="Sprite3D" parent="Health" index="0" instance=ExtResource("3_tok1r")]
 transform = Transform3D(0.8693225, 0, -0.49424535, 0, 1, 0, 0.49424535, 0, 0.8693225, -0.33689624, 0.20813084, 0.3469968)
 texture = SubResource("ViewportTexture_8g4oa")
+
+[node name="Camera3D" type="Camera3D" parent="." index="4"]
+transform = Transform3D(-1, 0, -8.742278e-08, -3.1229785e-08, 0.93401754, 0.3572271, 8.1654406e-08, 0.3572271, -0.93401754, 0, 3.536886, -4.6001844)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeStateMachine_tok1r")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendTree/Movement/blend_position = Vector2(0, 0)
+parameters/BlendTree/Blend2/blend_amount = 0.2
