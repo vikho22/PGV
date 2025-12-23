@@ -20,8 +20,7 @@ https://kenney.nl/assets/modular-buildings
 ### Personajes
 https://www.kenney.nl/assets/blocky-characters
 
-
-##Tareas
+## Tareas
 - Sistema disparo - Jorge
 - Sistema de puntuación 
 - Spawn de Enmigos 
