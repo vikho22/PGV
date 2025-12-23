@@ -26,7 +26,7 @@ Indica los pasos para probar tu PR (Ejemplo):
 - [ ] **Sin Errores en Consola:** He comprobado que no salen errores rojos ni warnings amarillos nuevos al ejecutar.
 - [ ] **Rutas y Strings:** No he usado rutas absolutas (ej. `C:/Users/...`) y he revisado que los `NodePaths` en el código (ej. `$AnimationTree`) coinciden con la escena.
 - [ ] **Mayúsculas/Minúsculas:** Todos los nombres de archivos nuevos están en `snake_case` (minúsculas) para evitar problemas entre Windows y Linux/Mac.
-- [ ] **Archivos de Importación:** Si he añadido assets (imágenes, fbx), he incluido los archivos `.import` correspondientes generados por Godot.
+- [ ] **Archivos de Importación:** Si he añadido assets (imágenes, fbx).
 - [ ] **Señales:** He verificado que las señales conectadas desde el editor no se han desconectado.
 
 ## ⚠️ Notas adicionales / Dependencias
