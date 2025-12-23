@@ -1,4 +1,4 @@
-#  titolo del PR: [feat/fix/refactor] Descripción corta (ej. "Añadir mecánica de salto", "Arreglar animación andar")
+# Título del PR: [tipo] Descripción corta
 
 ## 📝 Descripción
 Este PR implementa/arregla...
