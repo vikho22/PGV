@@ -19,3 +19,21 @@ https://kenney.nl/assets/retro-urban-kit
 https://kenney.nl/assets/modular-buildings
 ### Personajes
 https://www.kenney.nl/assets/blocky-characters
+
+
+##Tareas
+- Sistema disparo - Jorge
+- Sistema de puntuación 
+- Spawn de Enmigos 
+- Rutas de Spawn 
+- Diversidad Enemigos - Juanka
+- Diversidad Objetos 
+- Diversidad Armas - Jorge
+- Cofres 
+- Loot Enemigos
+- Tutorial
+- Logros
+- Volumen
+- Controles
+- Camara Atraviesa Paredes - Juanka
+- Pulir Mapa
