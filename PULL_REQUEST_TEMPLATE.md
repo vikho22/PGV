@@ -16,6 +16,7 @@ Este PR implementa/arregla...
 - [ ] ⚙️ Configuración (cambios en Project Settings, Exports, Importación)
 
 ## 🧪 ¿Cómo probar esto?
+Indica los pasos para probar tu PR (Ejemplo):
 1. Abre la escena `Nivel1.tscn` (o la que corresponda).
 2. Dale a Play.
 3. Intenta realizar la acción X...
