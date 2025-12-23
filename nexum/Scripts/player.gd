@@ -1,4 +1,6 @@
 extends CharacterBody3D
+class_name Player
+
 
 @onready var anim_player = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
