@@ -57,15 +57,11 @@ func _physics_process(delta: float) -> void:
 		var target_rotation = atan2(direction.x, direction.z)
 		rotation.y = lerp_angle(rotation.y, target_rotation, 0.2)
 		
-		# --- CORRECCIÓN AQUÍ ---
-		# Si nos movemos, solo ponemos "walk" si NO estamos disparando.
-		# Si estamos disparando, dejamos que la animación termine.
+
 		if anim_player.current_animation != "holding-right-shoot":
 			anim_player.play("walk")
 			
 	else:
-		# --- CORRECCIÓN AQUÍ ---
-		# Si estamos quietos, solo ponemos "idle" si NO estamos disparando.
 		if anim_player.current_animation != "holding-right-shoot":
 			anim_player.play("idle")
 
@@ -98,8 +94,6 @@ func obtener_arma():
 	
 # Usamos _unhandled_input para detectar pulsaciones únicas (no mantener pulsado)
 func _unhandled_input(event):
-	# Si pulsamos clic izquierdo (debes configurar "mouse_click" en Mapa de Entradas,
-	# o usar Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) en _process)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		
 		# Solo disparamos si tenemos el arma y la escena de la bala está cargada
