@@ -23,15 +23,15 @@ https://www.kenney.nl/assets/blocky-characters
 ## Tareas
 - Sistema disparo - Jorge
 - Sistema de puntuación 
-- Spawn de Enmigos 
-- Rutas de Spawn 
+- Spawn de Enmigos - Javier
+- Rutas de Spawn - Javier
 - Diversidad Enemigos - Juanka
 - Diversidad Objetos 
 - Diversidad Armas - Jorge
 - Cofres 
 - Loot Enemigos
-- Tutorial
-- Logros
+- Tutorial - Javier
+- Logros - Javier
 - Volumen
 - Controles
 - Camara Atraviesa Paredes - Juanka
