@@ -31,8 +31,8 @@ https://www.kenney.nl/assets/blocky-characters
 - Cofres 
 - Loot Enemigos
 - Tutorial - Javier
-- Logros - Javier
-- Volumen
-- Controles
+- Logros - Martin
+- Volumen - Martin
+- Controles - Martin
 - Camara Atraviesa Paredes - Juanka
 - Pulir Mapa
