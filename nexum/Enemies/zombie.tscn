@@ -1,13 +1,57 @@
-[gd_scene load_steps=8 format=3 uid="uid://33ymr3m82wgl"]
+[gd_scene load_steps=18 format=3 uid="uid://bxuani1547iis"]
 
 [ext_resource type="PackedScene" uid="uid://cp60x67lsrlss" path="res://Models/character-l.fbx" id="1_m4rhk"]
 [ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="2_7toqp"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_5xe6q"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m4rhk"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_asmuy"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k4t3d"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vv27w"]
+animation = &"sprint"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_6prr3"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_asmuy")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_k4t3d")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_vv27w")
+blend_point_2/pos = Vector2(0, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eq8ey"]
+animation = &"attack-melee-right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_matev"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_matev"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_asmuy"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k4t3d"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vv27w"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eq8ey"]
+states/End/position = Vector2(952, 73)
+states/Movement/node = SubResource("AnimationNodeBlendSpace2D_6prr3")
+states/Movement/position = Vector2(430, 73)
+states/Start/position = Vector2(187, 68)
+states/attack/node = SubResource("AnimationNodeAnimation_eq8ey")
+states/attack/position = Vector2(691, 73)
+states/die/node = SubResource("AnimationNodeAnimation_matev")
+states/die/position = Vector2(584, 200)
+transitions = ["Movement", "attack", SubResource("AnimationNodeStateMachineTransition_matev"), "attack", "Movement", SubResource("AnimationNodeStateMachineTransition_asmuy"), "Start", "Movement", SubResource("AnimationNodeStateMachineTransition_k4t3d"), "Movement", "die", SubResource("AnimationNodeStateMachineTransition_vv27w")]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nckgq"]
-size = Vector3(1.5825195, 2.8605652, 1)
+size = Vector3(1.5825195, 2.8467865, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b2mwl"]
 radius = 8.0
@@ -18,11 +62,25 @@ viewport_path = NodePath("SubViewport")
 [node name="character-l" instance=ExtResource("1_m4rhk")]
 script = ExtResource("2_7toqp")
 
+[node name="root" parent="character-l" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.05, 0)
+
+[node name="arm-left" parent="character-l/root/torso" index="0"]
+transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, 0.39999986, 1.1, -0.099999905)
+
+[node name="arm-right" parent="character-l/root/torso" index="1"]
+transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, -0.4000001, 1.1, -0.099999905)
+
+[node name="head" parent="character-l/root/torso" index="2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.10000001, 0, 0, 0, 0.10000002, 0, 1.2, 0)
+
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_m4rhk")
+tree_root = SubResource("AnimationNodeStateMachine_eq8ey")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Movement/blend_position = Vector2(-0.362916, 0.42600894)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12472522, 1.3234267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 1.4298893, 0)
 shape = SubResource("BoxShape3D_nckgq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4"]
