@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Player
 
+@onready var weapon_hitbox = $"character-d/root/torso/arm-left/Area3D"
 
 @onready var anim_player = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
@@ -42,6 +43,7 @@ func rotar_hacia_mouse():
 		look_at(intersection_point, Vector3.UP)
 
 func _physics_process(delta: float) -> void:
+	
 	# Aplicar gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -98,38 +100,44 @@ func _physics_process(delta: float) -> void:
 		
 		anim_tree.set("parameters/BlendTree/Blend2/blend_amount", new_hold)
 	
-	var has_collision = move_and_slide()
-	take_damage(has_collision)
+	move_and_slide()
 
-func take_damage(has: bool):
-	if can_take_damage and has:
-		for i in range(get_slide_collision_count()):
-			if get_slide_collision(i).get_collider() is CharacterBody3D:
-				var damage := 10
+func take_damage(damage: float):
+	var shield := $DataBars/Shield/Sprite3D
+	var health := $DataBars/Health/Sprite3D
+	
+	if shield.real_value > 0:
+		shield.take_damage(damage)
+		current_shield -= max(0,damage)
+		if shield.real_value <= 0:
+			var leftover = -shield.real_value
+			if leftover > 0:
+				health.take_damage(leftover)
+				current_health -= leftover
+	else:
+		health.take_damage(damage)
+		current_health -= damage
+	
+	
+	if current_health <= 0:
+		die()
+		return
+	
+	can_take_damage = false
+	await get_tree().create_timer(damage_timeout).timeout
+	can_take_damage = true
+	
+func die():
+	if not is_physics_processing():
+		return
+	set_physics_process(false) # Deja de perseguir
+	velocity = Vector3.ZERO    # Frena en seco
 
-				var shield := $DataBars/Shield/Sprite3D
-				var health := $DataBars/Health/Sprite3D
-				
-				
-				if shield.real_value > 0:
-					shield.take_damage(damage)
-
-					if shield.real_value <= 0:
-						var leftover = -shield.real_value
-						if leftover > 0:
-							health.take_damage(leftover)
-
-				else:
-					health.take_damage(damage)
-				
-				can_take_damage = false
-				await get_tree().create_timer(damage_timeout).timeout
-				can_take_damage = true
-				break
-				
-				
-
-func _on_sprite_3d_no_hp_left() -> void:
+	$CollisionShape3D.set_deferred("disabled", true)
+	
+	state_machine.travel("die") 
+	
+	await get_tree().create_timer(2.0).timeout
 	queue_free()
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -139,6 +147,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_state != "attack" and current_state != "shoot":
 			if melee:
 				state_machine.travel("attack")
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = true
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = false
 			else:
 				state_machine.travel("shoot")
 
@@ -149,3 +161,10 @@ func heal(amount: float) -> void:
 func get_shield(amount: float) -> void:
 	current_shield = min(current_shield + amount, max_shield)
 	$DataBars/Shield/Sprite3D.get_shield(amount)
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	var target = area.get_parent()
+	if target.has_method("take_damage"):
+		target.take_damage(20)
+		set_deferred("monitoring", false)
