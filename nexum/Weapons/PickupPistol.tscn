@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://beixlgwttya4"]
+
+[ext_resource type="Script" uid="uid://l1y8tfmp7pad" path="res://Scripts/pickup.gd" id="1_fci00"]
+[ext_resource type="PackedScene" uid="uid://bhhqtkkpile1r" path="res://Weapons/Guns/pistol.tscn" id="2_nre71"]
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="3_c4p0p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nre71"]
+radius = 1.2818133
+
+[node name="PickupPistol" type="Area3D"]
+collision_mask = 8
+script = ExtResource("1_fci00")
+weapon_scene_to_give = ExtResource("2_nre71")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nre71")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="blaster-a" parent="MeshInstance3D" instance=ExtResource("3_c4p0p")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.77157855, 0.74515843, 7.70092e-07, 1)
+light_energy = 3.0
+light_cull_mask = 4294967287
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5012611, 0)
+pixel_size = 0.007
+billboard = 1
+text = "[E] Recoger Pistola
+"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

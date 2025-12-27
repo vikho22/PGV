@@ -8,6 +8,7 @@ class_name Player
 @onready var camera = $Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var view_camera: Camera3D = get_viewport().get_camera_3d()
+@export var weapon_holder: Node3D
 
 @export var SPEED = 4.0
 @export var JUMP_VELOCITY = 5.5
@@ -107,6 +108,21 @@ func _physics_process(delta: float) -> void:
 		anim_tree.set("parameters/BlendTree/Blend2/blend_amount", new_hold)
 	
 	move_and_slide()
+	
+	
+func add_weapon(weapon_scene: PackedScene):
+	# 1. Borrar arma anterior si existe
+	if weapon != null:
+		weapon.queue_free()
+
+	# 3. Instanciar nueva arma
+	var new_weapon = weapon_scene.instantiate()
+	weapon_holder.add_child(new_weapon)
+	
+	# 4. Actualizar referencias
+	weapon = new_weapon
+	melee = false # Cambiamos modo a disparo
+	print("Arma equipada: ", new_weapon.name)
 
 func take_damage(has: bool):
 	if can_take_damage and has:
@@ -144,9 +160,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if !anim_tree.get("parameters/BlendTree/AttackType/active"):
 			if melee:
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "attack")
-			else:
+				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			
+			else: 
+				# <--- MODIFICADO: LÓGICA DE DISPARO
+				# 1. Activamos la animación de disparo
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
-			anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+				
+				# 2. Llamamos al script del arma para que dispare de verdad
+				if weapon != null and weapon.has_method("shoot"):
+					weapon.shoot()
 
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
