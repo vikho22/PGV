@@ -6,6 +6,7 @@ class_name Player
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 @onready var camera = $Camera3D
+@onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var view_camera: Camera3D = get_viewport().get_camera_3d()
 
 @export var SPEED = 4.0
@@ -90,10 +91,11 @@ func _physics_process(delta: float) -> void:
 		
 	
 	# Camara
-	camera.top_level = true 
-	camera.global_position = global_position + Vector3(0, 15, 5)
-	camera.global_rotation.x = deg_to_rad(-60)
-	camera.global_rotation.y = deg_to_rad(0) 
+	#camera.top_level = true 
+	#camera.global_position = global_position + Vector3(0, 15, 5)
+	#camera.global_rotation.x = deg_to_rad(-60)
+	#camera.global_rotation.y = deg_to_rad(0) 
+	#camera.position = Vector3.ZERO
 	
 	# Animación ataque
 	var move_speed = Vector2(velocity.x,velocity.z).length()
