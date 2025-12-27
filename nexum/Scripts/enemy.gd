@@ -33,8 +33,8 @@ func die() -> void:
 		
 	dying = true
 
-	set_physics_process(false) # Deja de perseguir
-	velocity = Vector3.ZERO    # Frena en seco
+	set_physics_process(false)
+	velocity = Vector3.ZERO
 
 	$CollisionShape3D.set_deferred("disabled", true)
 	
@@ -52,7 +52,6 @@ func take_damage(damage: float):
 		health -= damage
 		
 		if health <= 0:
-			print(health)
 			die()
 			return
 		

@@ -30,15 +30,7 @@ func _physics_process(delta: float) -> void:
 	
 	# 2. LÓGICA DE ATAQUE
 	if navigation.is_navigation_finished() && !onCooldowm:
-		onCooldowm = true
-		state_machine.travel("attack")
-		await get_tree().create_timer(0.2).timeout
-		weapon_hitbox.monitoring = true
-		
-		#deal_damage()
-		await get_tree().create_timer(attack_cooldown).timeout
-		weapon_hitbox.monitoring = false
-		onCooldowm = false
+		attack()
 	
 	# 3. LÓGICA DE MOVIMIENTO 
 	var current_position = global_position
@@ -63,3 +55,14 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	if target.has_method("take_damage"):
 		target.take_damage(strength)
 		set_deferred("monitoring", false)
+
+func attack():
+	onCooldowm = true
+	state_machine.travel("attack")
+	await get_tree().create_timer(0.2).timeout
+	weapon_hitbox.monitoring = true
+	
+	#deal_damage()
+	await get_tree().create_timer(attack_cooldown).timeout
+	weapon_hitbox.monitoring = false
+	onCooldowm = false

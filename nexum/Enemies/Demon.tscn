@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ckde57ew8fgrb"]
 
 [ext_resource type="PackedScene" uid="uid://doqrypn24pf5i" path="res://Models/Demon.fbx" id="1_p3ps7"]
-[ext_resource type="Script" uid="uid://cnk6lp2o1ebha" path="res://demon.gd" id="2_yd520"]
+[ext_resource type="Script" uid="uid://cnk6lp2o1ebha" path="res://Scripts/demon.gd" id="2_yd520"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1r2f0"]
 animation = &"CharacterArmature|Fast_Flying"
