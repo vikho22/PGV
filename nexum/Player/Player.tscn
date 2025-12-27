@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkep3cjgp021n"]
+[gd_scene load_steps=28 format=3 uid="uid://dkep3cjgp021n"]
 
 [ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 [ext_resource type="Script" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
-[ext_resource type="PackedScene" path="res://Player/shieldbar.tscn" id="4_ddoul"]
+[ext_resource type="PackedScene" uid="uid://dbyxgr1dj38ce" path="res://Player/shieldbar.tscn" id="4_ddoul"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
 size = Vector3(1.6169434, 2.7216644, 1)
@@ -14,6 +14,16 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j23h2"]
+animation = &"holding-left-shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0j2ni"]
+animation = &"attack-melee-left"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_v0k0e"]
+filters = ["character-d/root/torso", "character-d/root/torso/arm-left", "character-d/root/torso/arm-right", "character-d/root/torso/head"]
+mix_mode = 1
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tok1r"]
 filter_enabled = true
@@ -39,16 +49,34 @@ blend_point_1/pos = Vector2(0, 1)
 blend_point_2/node = SubResource("AnimationNodeAnimation_vlldt")
 blend_point_2/pos = Vector2(1, 0)
 
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5wa8t"]
+input_0/name = "attack"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "shoot"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j23h2"]
-graph_offset = Vector2(-21.607239, -2.8505402)
-nodes/output/position = Vector2(720, 180)
+graph_offset = Vector2(-203.47272, 77.822876)
+nodes/output/position = Vector2(1080, 240)
 nodes/Movement/node = SubResource("AnimationNodeBlendSpace2D_s1rgi")
 nodes/Movement/position = Vector2(60, 200)
 nodes/HoldWeapon/node = SubResource("AnimationNodeAnimation_ddoul")
 nodes/HoldWeapon/position = Vector2(260, 320)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_tok1r")
 nodes/Blend2/position = Vector2(500, 140)
-node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"Movement", &"Blend2", 1, &"HoldWeapon"]
+nodes/AttackType/node = SubResource("AnimationNodeOneShot_v0k0e")
+nodes/AttackType/position = Vector2(840, 220)
+nodes/Transition/node = SubResource("AnimationNodeTransition_5wa8t")
+nodes/Transition/position = Vector2(580, 460)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0j2ni")
+nodes/Animation/position = Vector2(300, 500)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_j23h2")
+"nodes/Animation 2/position" = Vector2(300, 680)
+node_connections = [&"output", 0, &"AttackType", &"Blend2", 0, &"Movement", &"Blend2", 1, &"HoldWeapon", &"AttackType", 0, &"Blend2", &"AttackType", 1, &"Transition", &"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tok1r"]
 animation = &"attack-melee-left"
@@ -86,17 +114,26 @@ transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTrans
 [node name="character-d" instance=ExtResource("1_xhfnw")]
 script = ExtResource("2_tok1r")
 
+[node name="root" parent="character-d" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06406765, 0)
+
+[node name="leg-left" parent="character-d/root" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.783249, 0.6217081, 0, -0.6217081, 0.783249, 0.2, 1, 2.0348877e-14)
+
+[node name="leg-right" parent="character-d/root" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.783249, -0.6217081, 0, 0.6217081, 0.783249, -0.2, 1, 2.183782e-14)
+
 [node name="torso" parent="character-d/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.99970716, 0.024193833, 0, -0.024193833, 0.99970716, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.93151855, 0.3636938, 0, -0.3636938, 0.93151855, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99504495, -0.09942593, 0, 0.09942593, 0.99504495, 0.39999998, 1.1, -0.099999994)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9983144, 0.058038253, 0, -0.058038253, 0.9983144, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9156196, 0.40204564, 0, -0.40204564, 0.9156196, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.09973665, 0, 0.0072524888, 0, 0.1, 0, -0.0072524888, 0, 0.09973665, 0, 1.2, 0)
+transform = Transform3D(0.09958664, 0, -0.009082767, 0, 0.1, 0, 0.009082767, 0, 0.09958664, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0)
@@ -125,5 +162,11 @@ transform = Transform3D(-1, 0, -8.742278e-08, -3.1229785e-08, 0.93401754, 0.3572
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 tree_root = SubResource("AnimationNodeStateMachine_tok1r")
 anim_player = NodePath("../AnimationPlayer")
-parameters/BlendTree/Movement/blend_position = Vector2(0, 0)
+parameters/BlendTree/Movement/blend_position = Vector2(-0.0015847683, 1.0358744)
 parameters/BlendTree/Blend2/blend_amount = 0.2
+parameters/BlendTree/AttackType/active = false
+parameters/BlendTree/AttackType/internal_active = false
+parameters/BlendTree/AttackType/request = 0
+parameters/BlendTree/Transition/current_state = ""
+parameters/BlendTree/Transition/transition_request = ""
+parameters/BlendTree/Transition/current_index = -1
