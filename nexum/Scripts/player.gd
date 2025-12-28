@@ -25,32 +25,45 @@ var melee = true
 
 const BLEND_SPEED = 10.0
 
-func rotar_hacia_mouse(delta: float):
-	# 1. Obtenemos la posición del ratón en la pantalla (2D)
+func get_mouse_position_3d() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
-
-	# 2. Creamos un plano matemático horizontal (Vector3.UP) 
-	# que corta exactamente a la altura de nuestro personaje (global_position.y)
 	var drop_plane = Plane(Vector3.UP, global_position.y)
-
-	# 3. Proyectamos un rayo desde la cámara
 	var ray_origin = view_camera.project_ray_origin(mouse_pos)
 	var ray_normal = view_camera.project_ray_normal(mouse_pos)
+	return drop_plane.intersects_ray(ray_origin, ray_normal)
 
-	# 4. Calculamos dónde choca ese rayo con nuestro plano imaginario
-	var intersection_point = drop_plane.intersects_ray(ray_origin, ray_normal)
-
-	# 5. Si hay intersección (el ratón está sobre el mundo visible), rotamos
-	if intersection_point:# 1. Calculamos el vector dirección hacia el punto
+func rotar_hacia_mouse(delta: float):
+	var intersection_point = get_mouse_position_3d()
+	
+	if intersection_point:
 		var look_direction = intersection_point - global_position
-		
-		# 2. Obtenemos el ángulo hacia ese punto
-		# Sumamos PI porque tu modelo mira hacia Z positivo
 		var target_angle = atan2(look_direction.x, look_direction.z)
-		
-		# 3. Aplicamos la rotación suavemente
-		# El valor 10.0 controla la velocidad del giro, puedes ajustarlo
 		rotation.y = lerp_angle(rotation.y, target_angle, delta * 10.0)
+	## 1. Obtenemos la posición del ratón en la pantalla (2D)
+	#var mouse_pos = get_viewport().get_mouse_position()
+#
+	## 2. Creamos un plano matemático horizontal (Vector3.UP) 
+	## que corta exactamente a la altura de nuestro personaje (global_position.y)
+	#var drop_plane = Plane(Vector3.UP, global_position.y)
+#
+	## 3. Proyectamos un rayo desde la cámara
+	#var ray_origin = view_camera.project_ray_origin(mouse_pos)
+	#var ray_normal = view_camera.project_ray_normal(mouse_pos)
+#
+	## 4. Calculamos dónde choca ese rayo con nuestro plano imaginario
+	#var intersection_point = drop_plane.intersects_ray(ray_origin, ray_normal)
+#
+	## 5. Si hay intersección (el ratón está sobre el mundo visible), rotamos
+	#if intersection_point:# 1. Calculamos el vector dirección hacia el punto
+		#var look_direction = intersection_point - global_position
+		#
+		## 2. Obtenemos el ángulo hacia ese punto
+		## Sumamos PI porque tu modelo mira hacia Z positivo
+		#var target_angle = atan2(look_direction.x, look_direction.z)
+		#
+		## 3. Aplicamos la rotación suavemente
+		## El valor 10.0 controla la velocidad del giro, puedes ajustarlo
+		#rotation.y = lerp_angle(rotation.y, target_angle, delta * 10.0)
 
 func _physics_process(delta: float) -> void:
 	# Gravedad
@@ -163,14 +176,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 			
 			else: 
-				# <--- MODIFICADO: LÓGICA DE DISPARO
 				# 1. Activamos la animación de disparo
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
 				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 				
 				# 2. Llamamos al script del arma para que dispare de verdad
 				if weapon != null and weapon.has_method("shoot"):
-					weapon.shoot()
+					var target = get_mouse_position_3d()
+					# Le decimos al arma: "Dispara hacia ahí, te da igual mi cuerpo"
+					if target:
+						weapon.shoot(target)
+					else:
+						weapon.shoot()
 
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)

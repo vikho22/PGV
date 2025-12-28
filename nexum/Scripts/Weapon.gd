@@ -16,22 +16,23 @@ var can_shoot: bool = true
 func _ready():
 	timer.wait_time = fire_rate
 
-func shoot():
-	# 1. Comprobamos si podemos disparar
+func shoot(target_point: Vector3 = Vector3.ZERO):
 	if not can_shoot or bullet_scene == null:
 		return
 	
-	# 2. Instanciamos la bala
 	var new_bullet = bullet_scene.instantiate()
-	
-	# 3. La añadimos al mundo 
 	get_tree().root.add_child(new_bullet)
 	
-	# 4. Colocamos la bala en el Muzzle
-	new_bullet.global_transform = muzzle.global_transform
-	new_bullet.damage = damage # Pasamos el daño del arma a la bala
+	# Colocamos la bala en la boca del cañón (Posición)
+	new_bullet.global_position = muzzle.global_position
+	new_bullet.damage = damage
 	
-	# 5. Iniciamos el enfriamiento
+	if target_point != Vector3.ZERO:
+		var aim_target = Vector3(target_point.x, muzzle.global_position.y, target_point.z)
+		new_bullet.look_at(aim_target, Vector3.UP)
+	else:
+		new_bullet.global_rotation = muzzle.global_rotation
+
 	can_shoot = false
 	timer.start()
 

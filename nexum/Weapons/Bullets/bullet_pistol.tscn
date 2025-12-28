@@ -4,15 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://dni2ytjtinb7c" path="res://Weapons/bullet-foam-tip.fbx" id="2_pjxhf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5hhy"]
-radius = 0.033203125
-height = 0.08148718
+radius = 0.07910156
+height = 0.36199254
 
 [node name="BulletPistol" instance=ExtResource("1_u7uj1")]
 speed = 60.0
+
+[node name="Visuals" parent="." index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="bullet-foam-tip" parent="Visuals" index="0" instance=ExtResource("2_pjxhf")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, -0.009162851, -0.99995816, 0, 0.99995816, -0.009162851, 0, -0.00049621053, -0.029564885)
+transform = Transform3D(1, 0, 0, 0, -0.009162851, -0.99995816, 0, 0.99995816, -0.009162851, 0, 0.0006876146, -0.14409374)
 shape = SubResource("CapsuleShape3D_e5hhy")
