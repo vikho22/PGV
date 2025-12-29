@@ -28,7 +28,7 @@ https://www.kenney.nl/assets/blocky-characters
 - Diversidad Enemigos --> Juanka
 - Diversidad Objetos -->
 - Diversidad Armas --> Jorge
-- Cofres 
+- Cofres y Generación Objetos 
 - Loot Enemigos
 - Tutorial --> Javier
 - Logros --> Martin
