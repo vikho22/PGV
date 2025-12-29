@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bxuani1547iis"]
+[gd_scene load_steps=18 format=3 uid="uid://b5n5cu83arukk"]
 
 [ext_resource type="PackedScene" uid="uid://cp60x67lsrlss" path="res://Models/character-l.fbx" id="1_m4rhk"]
 [ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="2_7toqp"]
@@ -60,19 +60,20 @@ radius = 8.0
 viewport_path = NodePath("SubViewport")
 
 [node name="character-l" instance=ExtResource("1_m4rhk")]
+collision_layer = 8
 script = ExtResource("2_7toqp")
 
-[node name="root" parent="character-l" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.05, 0)
+[node name="torso" parent="character-l/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-l/root/torso" index="0"]
-transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, 0.39999986, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.99999934, -0.0010894274, 0, 0.0010894274, 0.99999934, 0.39999986, 1.1, -0.099999905)
 
 [node name="arm-right" parent="character-l/root/torso" index="1"]
-transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, -0.4000001, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.9999993, -0.0010894274, 0, 0.0010894274, 0.9999993, -0.4000001, 1.1, -0.099999905)
 
 [node name="head" parent="character-l/root/torso" index="2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.10000001, 0, 0, 0, 0.10000002, 0, 1.2, 0)
+transform = Transform3D(0.09999994, 0, -0.00010894277, 0, 0.10000002, 0, 0.00010894274, 0, 0.099999964, 0, 1.2, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eq8ey")
