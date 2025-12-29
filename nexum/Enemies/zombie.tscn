@@ -60,23 +60,22 @@ size = Vector3(1.5996704, 2.8467865, 0.80752563)
 viewport_path = NodePath("SubViewport")
 
 [node name="character-l" instance=ExtResource("1_m4rhk")]
-collision_layer = 8
 script = ExtResource("2_7toqp")
 
 [node name="root" parent="character-l" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010327647, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.031706084, 0)
 
 [node name="leg-left" parent="character-l/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9712265, 0.23815767, 0, -0.23815767, 0.9712265, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.88766927, 0.46048152, 0, -0.46048152, 0.88766927, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-l/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9712266, -0.23815744, 0, 0.23815744, 0.9712266, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.8876693, -0.46048146, 0, 0.46048146, 0.8876693, -0.2, 1, 2.183782e-14)
 
 [node name="arm-left" parent="character-l/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.96143216, -0.27504167, 0, 0.27504167, 0.96143216, 0.39999986, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.8377417, -0.5460665, 0, 0.5460665, 0.8377417, 0.39999986, 1.1, -0.099999905)
 
 [node name="arm-right" parent="character-l/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.96143216, 0.2750416, 0, -0.2750416, 0.96143216, -0.4000001, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.8377416, 0.54606646, 0, -0.54606646, 0.8377416, -0.4000001, 1.1, -0.099999905)
 
 [node name="Area3D" type="Area3D" parent="character-l/root/torso/arm-right" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, 0.4000001, -1.79989, 0.10196082)
@@ -89,7 +88,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.5973995, 0.93436676,
 shape = SubResource("BoxShape3D_eq8ey")
 
 [node name="head" parent="character-l/root/torso" index="2"]
-transform = Transform3D(0.09939657, 0, -0.010969099, 0, 0.10000001, 0, 0.010969097, 0, 0.099396594, 0, 1.2, 0)
+transform = Transform3D(0.097550265, 0, -0.021998785, 0, 0.10000001, 0, 0.021998782, 0, 0.09755029, 0, 1.2, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eq8ey")

@@ -9,6 +9,7 @@ class_name Player
 @onready var camera = $Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var view_camera: Camera3D = get_viewport().get_camera_3d()
+@export var weapon_holder: Node3D
 
 @export var speed = 4.0
 @export var jump_velocity = 5.5
@@ -26,32 +27,45 @@ var melee = true
 
 const BLEND_SPEED = 10.0
 
-func rotar_hacia_mouse(delta: float):
-	# 1. Obtenemos la posición del ratón en la pantalla (2D)
+func get_mouse_position_3d() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
-
-	# 2. Creamos un plano matemático horizontal (Vector3.UP) 
-	# que corta exactamente a la altura de nuestro personaje (global_position.y)
 	var drop_plane = Plane(Vector3.UP, global_position.y)
-
-	# 3. Proyectamos un rayo desde la cámara
 	var ray_origin = view_camera.project_ray_origin(mouse_pos)
 	var ray_normal = view_camera.project_ray_normal(mouse_pos)
+	return drop_plane.intersects_ray(ray_origin, ray_normal)
 
-	# 4. Calculamos dónde choca ese rayo con nuestro plano imaginario
-	var intersection_point = drop_plane.intersects_ray(ray_origin, ray_normal)
-
-	# 5. Si hay intersección (el ratón está sobre el mundo visible), rotamos
-	if intersection_point:# 1. Calculamos el vector dirección hacia el punto
+func rotar_hacia_mouse(delta: float):
+	var intersection_point = get_mouse_position_3d()
+	
+	if intersection_point:
 		var look_direction = intersection_point - global_position
-		
-		# 2. Obtenemos el ángulo hacia ese punto
-		# Sumamos PI porque tu modelo mira hacia Z positivo
 		var target_angle = atan2(look_direction.x, look_direction.z)
-		
-		# 3. Aplicamos la rotación suavemente
-		# El valor 10.0 controla la velocidad del giro, puedes ajustarlo
 		rotation.y = lerp_angle(rotation.y, target_angle, delta * 10.0)
+	## 1. Obtenemos la posición del ratón en la pantalla (2D)
+	#var mouse_pos = get_viewport().get_mouse_position()
+#
+	## 2. Creamos un plano matemático horizontal (Vector3.UP) 
+	## que corta exactamente a la altura de nuestro personaje (global_position.y)
+	#var drop_plane = Plane(Vector3.UP, global_position.y)
+#
+	## 3. Proyectamos un rayo desde la cámara
+	#var ray_origin = view_camera.project_ray_origin(mouse_pos)
+	#var ray_normal = view_camera.project_ray_normal(mouse_pos)
+#
+	## 4. Calculamos dónde choca ese rayo con nuestro plano imaginario
+	#var intersection_point = drop_plane.intersects_ray(ray_origin, ray_normal)
+#
+	## 5. Si hay intersección (el ratón está sobre el mundo visible), rotamos
+	#if intersection_point:# 1. Calculamos el vector dirección hacia el punto
+		#var look_direction = intersection_point - global_position
+		#
+		## 2. Obtenemos el ángulo hacia ese punto
+		## Sumamos PI porque tu modelo mira hacia Z positivo
+		#var target_angle = atan2(look_direction.x, look_direction.z)
+		#
+		## 3. Aplicamos la rotación suavemente
+		## El valor 10.0 controla la velocidad del giro, puedes ajustarlo
+		#rotation.y = lerp_angle(rotation.y, target_angle, delta * 10.0)
 
 func _physics_process(delta: float) -> void:
 	# Gravedad
@@ -104,6 +118,21 @@ func _physics_process(delta: float) -> void:
 		anim_tree.set("parameters/BlendTree/Blend2/blend_amount", new_hold)
 	
 	move_and_slide()
+	
+	
+func add_weapon(weapon_scene: PackedScene):
+	# 1. Borrar arma anterior si existe
+	if weapon != null:
+		weapon.queue_free()
+
+	# 3. Instanciar nueva arma
+	var new_weapon = weapon_scene.instantiate()
+	weapon_holder.add_child(new_weapon)
+	
+	# 4. Actualizar referencias
+	weapon = new_weapon
+	melee = false # Cambiamos modo a disparo
+	print("Arma equipada: ", new_weapon.name)
 
 func take_damage(damage: float):
 	var shield := $DataBars/Shield/Sprite3D
@@ -147,14 +176,26 @@ func _unhandled_input(event: InputEvent) -> void:
 		if !anim_tree.get("parameters/BlendTree/AttackType/active"):
 			if melee:
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "attack")
-			else:
-				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
-			anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-			if melee:
+				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			
 				await get_tree().create_timer(0.2).timeout
 				weapon_hitbox.monitoring = true
 				await get_tree().create_timer(0.2).timeout
 				weapon_hitbox.monitoring = false
+			else: 
+				# 1. Activamos la animación de disparo
+				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
+				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+				
+				# 2. Llamamos al script del arma para que dispare de verdad
+				if weapon != null and weapon.has_method("shoot"):
+					var target = get_mouse_position_3d()
+					# Le decimos al arma: "Dispara hacia ahí, te da igual mi cuerpo"
+					if target:
+						weapon.shoot(target)
+					else:
+						weapon.shoot()
+				
 				
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)

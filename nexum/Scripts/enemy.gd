@@ -44,6 +44,7 @@ func die() -> void:
 	queue_free()
 
 func take_damage(damage: float):
+	print("attacked")
 	if can_take_damage:
 		var health_bar := $Health/Sprite3D
 		
