@@ -1,6 +1,6 @@
 extends Enemy
 
-@onready var weapon_hitbox = $"character-l/root/torso/arm-left/Area3D"
+@onready var weapon_hitbox = $"character-l/root/torso/arm-right/Area3D"
 
 func _ready() -> void:
 	navigation.target_desired_distance = 1.5

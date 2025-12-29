@@ -62,13 +62,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		
-	#var current_state = state_machine.get_current_node()
-	
-	#if current_state == "attack" or current_state == "shoot":
-		#rotar_hacia_mouse(delta)
-		#velocity = Vector3.ZERO
-		#move_and_slide()
-		#return
+	var current_state = state_machine.get_current_node()
+		
 	
 	# Movimiento
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
@@ -77,12 +72,12 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
 		
 		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 1))
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
 		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 0))
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	# Rotación
 	if !anim_tree.get("parameters/BlendTree/AttackType/active"):
@@ -155,7 +150,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
 			anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
+			if melee:
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = true
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = false
+				
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
 	$DataBars/Health/Sprite3D.heal(amount)
@@ -167,6 +167,7 @@ func get_shield(amount: float) -> void:
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	var target = area.get_parent()
+	print("attacked")
 	if target.has_method("take_damage"):
 		target.take_damage(strength)
 		set_deferred("monitoring", false)

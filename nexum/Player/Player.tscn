@@ -1,10 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://dkep3cjgp021n"]
+[gd_scene load_steps=26 format=3 uid="uid://dkep3cjgp021n"]
 
 [ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 [ext_resource type="Script" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
-[ext_resource type="PackedScene" uid="uid://dbyxgr1dj38ce" path="res://Player/shieldbar.tscn" id="4_ddoul"]
+[ext_resource type="PackedScene" uid="uid://d27tj8y0adgty" path="res://Player/shieldbar.tscn" id="4_ddoul"]
 [ext_resource type="Script" uid="uid://ddqy70tqlh6qy" path="res://Player/spring_arm_3d.gd" id="6_6ysni"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ysni"]
@@ -64,7 +64,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j23h2"]
-graph_offset = Vector2(-161.93689, 140.17072)
+graph_offset = Vector2(143.77283, 700.274)
 nodes/output/position = Vector2(1080, 240)
 nodes/Movement/node = SubResource("AnimationNodeBlendSpace2D_s1rgi")
 nodes/Movement/position = Vector2(60, 200)
@@ -90,30 +90,24 @@ states/BlendTree/node = SubResource("AnimationNodeBlendTree_j23h2")
 states/BlendTree/position = Vector2(435, 100)
 transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_0j2ni")]
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6ysni"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_8g4oa"]
 size = Vector3(1.6190491, 2.7250977, 0.81677246)
-
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6ysni"]
 
 [node name="character-d" instance=ExtResource("1_xhfnw")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("2_tok1r")
 
-[node name="root" parent="character-d" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010400921, 0)
-
 [node name="leg-left" parent="character-d/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9978821, -0.06504505, 0, 0.06504505, 0.9978821, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-d/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.99788207, 0.06504518, 0, -0.06504518, 0.99788207, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.2, 1, 2.183782e-14)
 
 [node name="torso" parent="character-d/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.99749786, -0.07069454, 0, 0.07069454, 0.99749786, 0, 0.7, 0)
-
-[node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9895995, 0.14384995, 0, -0.14384995, 0.9895995, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="Area3D" type="Area3D" parent="character-d/root/torso/arm-left" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, -0.39999986, -1.79989, 0.10196082)
@@ -126,10 +120,10 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 1.1641532e-10, 0, -1.1641532e-10, 1.5
 shape = SubResource("BoxShape3D_6ysni")
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9856171, -0.16899364, 0, 0.16899364, 0.9856171, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.0977557, 0, -0.021067038, 0, 0.1, 0, 0.021067038, 0, 0.0977557, 0, 1.2, 0)
+transform = Transform3D(0.09999999, 0, 0, 0, 0.1, 0, 0, 0, 0.09999999, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0.00033569336)
