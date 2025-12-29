@@ -1,7 +1,5 @@
 extends Sprite3D
 
-signal no_hp_left
-
 @export var max_hp: int = 100
 var real_value: float
 
@@ -15,9 +13,6 @@ func take_damage(damage: float):
 	real_value -= damage
 	
 	create_tween().tween_property($SubViewport/Panel/ProgressBar,"value",real_value,0.3)
-	
-	if real_value <= 0.1:
-		no_hp_left.emit()
 		
 		
 

@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Player
 
+@onready var weapon_hitbox = $"character-d/root/torso/arm-left/Area3D"
 
 @onready var anim_player = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
@@ -9,8 +10,9 @@ class_name Player
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var view_camera: Camera3D = get_viewport().get_camera_3d()
 
-@export var SPEED = 4.0
-@export var JUMP_VELOCITY = 5.5
+@export var speed = 4.0
+@export var jump_velocity = 5.5
+@export var strength = 10
 
 #Variables de vida:
 var max_health: float = 100.0
@@ -58,15 +60,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 		
-	#var current_state = state_machine.get_current_node()
-	
-	#if current_state == "attack" or current_state == "shoot":
-		#rotar_hacia_mouse(delta)
-		#velocity = Vector3.ZERO
-		#move_and_slide()
-		#return
+	var current_state = state_machine.get_current_node()
+		
 	
 	# Movimiento
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
@@ -75,12 +72,12 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
 		
 		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 1))
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
 		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 0))
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	# Rotación
 	if !anim_tree.get("parameters/BlendTree/AttackType/active"):
@@ -108,35 +105,41 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func take_damage(has: bool):
-	if can_take_damage and has:
-		for i in range(get_slide_collision_count()):
-			if get_slide_collision(i).get_collider() is CharacterBody3D:
-				var damage := 10
+func take_damage(damage: float):
+	var shield := $DataBars/Shield/Sprite3D
+	var health := $DataBars/Health/Sprite3D
+	
+	if shield.real_value > 0:
+		shield.take_damage(damage)
+		current_shield -= max(0,damage)
+		if shield.real_value <= 0:
+			var leftover = -shield.real_value
+			if leftover > 0:
+				health.take_damage(leftover)
+				current_health -= leftover
+	else:
+		health.take_damage(damage)
+		current_health -= damage
+	
+	if current_health <= 0:
+		die()
+		return
+	
+	can_take_damage = false
+	await get_tree().create_timer(damage_timeout).timeout
+	can_take_damage = true
+	
+func die():
+	if not is_physics_processing():
+		return
+	set_physics_process(false) # Deja de perseguir
+	velocity = Vector3.ZERO    # Frena en seco
 
-				var shield := $DataBars/Shield/Sprite3D
-				var health := $DataBars/Health/Sprite3D
-				
-				
-				if shield.real_value > 0:
-					shield.take_damage(damage)
-
-					if shield.real_value <= 0:
-						var leftover = -shield.real_value
-						if leftover > 0:
-							health.take_damage(leftover)
-
-				else:
-					health.take_damage(damage)
-				
-				can_take_damage = false
-				await get_tree().create_timer(damage_timeout).timeout
-				can_take_damage = true
-				break
-				
-				
-
-func _on_sprite_3d_no_hp_left() -> void:
+	$CollisionShape3D.set_deferred("disabled", true)
+	
+	state_machine.travel("die") 
+	
+	await get_tree().create_timer(2.0).timeout
 	queue_free()
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -147,7 +150,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
 			anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
+			if melee:
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = true
+				await get_tree().create_timer(0.2).timeout
+				weapon_hitbox.monitoring = false
+				
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
 	$DataBars/Health/Sprite3D.heal(amount)
@@ -155,3 +163,11 @@ func heal(amount: float) -> void:
 func get_shield(amount: float) -> void:
 	current_shield = min(current_shield + amount, max_shield)
 	$DataBars/Shield/Sprite3D.get_shield(amount)
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	var target = area.get_parent()
+	print("attacked")
+	if target.has_method("take_damage"):
+		target.take_damage(strength)
+		set_deferred("monitoring", false)
