@@ -22,7 +22,7 @@ https://www.kenney.nl/assets/blocky-characters
 
 ## Lista de Tareas
 
-- [ ] **Sistema disparo** --> Jorge
+- [x] **Sistema disparo** --> Jorge
 - [ ] **Sistema de puntuación**
 - [ ] **Spawn de Enemigos** --> Javier
 - [ ] **Rutas de Spawn** --> Javier
