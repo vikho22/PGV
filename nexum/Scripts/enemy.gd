@@ -38,7 +38,7 @@ func die() -> void:
 
 	$CollisionShape3D.set_deferred("disabled", true)
 	
-	state_machine.travel("die") 
+	state_machine.travel("die")
 	
 	await get_tree().create_timer(2.0).timeout
 	queue_free()

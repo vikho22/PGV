@@ -62,33 +62,24 @@ viewport_path = NodePath("SubViewport")
 [node name="character-l" instance=ExtResource("1_m4rhk")]
 script = ExtResource("2_7toqp")
 
-[node name="root" parent="character-l" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04403886, 0)
-
-[node name="leg-left" parent="character-l/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.82674646, -0.56257474, 0, 0.56257474, 0.82674646, 0.2, 1, 2.0348877e-14)
-
-[node name="leg-right" parent="character-l/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.82674634, 0.56257486, 0, -0.56257486, 0.82674634, -0.2, 1, 2.183782e-14)
-
 [node name="arm-left" parent="character-l/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.8660398, 0.49997476, 0, -0.49997476, 0.8660398, 0.39999986, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.39999986, 1.1, -0.099999905)
 
-[node name="Area3D" type="Area3D" parent="character-l/root/torso/arm-left" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, -0.39999986, -1.79989, 0.10196082)
+[node name="arm-right" parent="character-l/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.4000001, 1.1, -0.099999905)
+
+[node name="Area3D" type="Area3D" parent="character-l/root/torso/arm-right" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, 0.4000001, -1.79989, 0.10196082)
 collision_layer = 0
 collision_mask = 4
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="character-l/root/torso/arm-left/Area3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="character-l/root/torso/arm-right/Area3D" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.5973995, 0.93436676, -0.103027366)
 shape = SubResource("BoxShape3D_eq8ey")
 
-[node name="arm-right" parent="character-l/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.8660399, -0.49997467, 0, 0.49997467, 0.8660399, -0.4000001, 1.1, -0.099999905)
-
 [node name="head" parent="character-l/root/torso" index="2"]
-transform = Transform3D(0.099329524, 0, 0.01156047, 0, 0.10000001, 0, -0.011560468, 0, 0.099329546, 0, 1.2, 0)
+transform = Transform3D(0.099999994, 0, 0, 0, 0.10000001, 0, 0, 0, 0.10000002, 0, 1.2, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eq8ey")
@@ -118,4 +109,4 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008239746, 1.4298893, 0.0013275146)
 shape = SubResource("BoxShape3D_nckgq")
 
-[connection signal="area_entered" from="character-l/root/torso/arm-left/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="character-l/root/torso/arm-right/Area3D" to="." method="_on_area_3d_area_entered"]

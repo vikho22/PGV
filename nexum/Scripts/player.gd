@@ -8,8 +8,9 @@ class_name Player
 @onready var state_machine = anim_tree.get("parameters/playback")
 @onready var camera = $Camera3D
 
-@export var SPEED = 4.0
-@export var JUMP_VELOCITY = 5.5
+@export var speed = 4.0
+@export var jump_velocity = 5.5
+@export var strength = 10
 
 #Variables de vida:
 var max_health: float = 100.0
@@ -58,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 
 	var direction = Vector3.ZERO
 
@@ -85,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	camera.global_rotation.y = deg_to_rad(0) 
 	camera.global_rotation.x = deg_to_rad(-60) 
 	
-	var horizontal_velocity = direction * SPEED
+	var horizontal_velocity = direction * speed
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.z
 	
@@ -93,11 +94,8 @@ func _physics_process(delta: float) -> void:
 	
 	if !melee:
 		var target_hold = 0.0 if velocity.length() > 0 else 1.0
-		
 		var current_hold = anim_tree.get("parameters/BlendTree/Blend2/blend_amount")
-		
 		var new_hold = lerp(float(current_hold), target_hold, delta * BLEND_SPEED)
-		
 		anim_tree.set("parameters/BlendTree/Blend2/blend_amount", new_hold)
 	
 	move_and_slide()
@@ -117,7 +115,6 @@ func take_damage(damage: float):
 	else:
 		health.take_damage(damage)
 		current_health -= damage
-	
 	
 	if current_health <= 0:
 		die()
@@ -166,5 +163,5 @@ func get_shield(amount: float) -> void:
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	var target = area.get_parent()
 	if target.has_method("take_damage"):
-		target.take_damage(20)
+		target.take_damage(strength)
 		set_deferred("monitoring", false)
