@@ -38,4 +38,4 @@ https://www.kenney.nl/assets/blocky-characters
 - Pulir Mapa
 - Interfaz
 
-  \checkbox hola
+
