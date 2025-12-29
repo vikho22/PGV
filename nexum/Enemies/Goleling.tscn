@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxubitjvc2lgt"]
+
+[ext_resource type="Script" path="res://Scripts/goleling.gd" id="2_eqvic"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1r2f0"]
+animation = &"CharacterArmature|Fast_Flying"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eqvic"]
+animation = &"CharacterArmature|Death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqvic"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tnjxb"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tnjxb"]
+states/CharacterArmature|Fast_Flying/node = SubResource("AnimationNodeAnimation_1r2f0")
+states/CharacterArmature|Fast_Flying/position = Vector2(425, 100)
+states/die/node = SubResource("AnimationNodeAnimation_eqvic")
+states/die/position = Vector2(351, 178)
+transitions = ["Start", "CharacterArmature|Fast_Flying", SubResource("AnimationNodeStateMachineTransition_eqvic"), "CharacterArmature|Fast_Flying", "die", SubResource("AnimationNodeStateMachineTransition_tnjxb")]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1r2f0"]
+size = Vector3(1.6081543, 1.4257813, 1.4168091)
+
+[node name="Goleling"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+collision_layer = 0
+script = ExtResource("2_eqvic")
+strength = 5.0
+max_health = 20.0
+
+[node name="Skeleton3D" parent="CharacterArmature" index="0"]
+bones/1/position = Vector3(3.2015552e-05, 0.015013001, -0.001339514)
+bones/1/rotation = Quaternion(-0.01462718, -0.0009377923, 0.0032875577, 0.99988717)
+bones/1/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
+bones/2/position = Vector3(1.1872214e-11, 0.0038552883, 1.3852929e-10)
+bones/2/rotation = Quaternion(0.23638546, 0.00018450983, -0.0034135182, 0.97165334)
+bones/2/scale = Vector3(1, 1.0000001, 1)
+bones/3/position = Vector3(-1.0468804e-11, 0.0044923327, -9.67675e-10)
+bones/3/rotation = Quaternion(0.58677006, -0.00022328364, -0.00016083644, 0.8097537)
+bones/3/scale = Vector3(0.99999994, 0.99999976, 0.9999999)
+bones/5/position = Vector3(0.0038414353, 0.0055359, -0.0017555071)
+bones/5/rotation = Quaternion(-0.20645621, 0.048400052, -0.74759954, 0.62938726)
+bones/5/scale = Vector3(1, 1.0000001, 1)
+bones/6/position = Vector3(1.573441e-09, 0.0070250235, 2.1599557e-10)
+bones/6/rotation = Quaternion(0.0040410683, -0.611235, -0.34167767, 0.71388507)
+bones/6/scale = Vector3(1.0000001, 1.0000002, 0.99999994)
+bones/7/position = Vector3(-3.7297643e-10, 0.004402768, 4.8081907e-09)
+bones/7/rotation = Quaternion(-0.15528369, 0.004531229, -0.025636088, 0.9875269)
+bones/7/scale = Vector3(0.9999999, 1, 1)
+bones/8/position = Vector3(8.5926447e-11, 0.004204202, -4.7280415e-09)
+bones/8/rotation = Quaternion(-0.063901864, 0.063135564, 0.028827194, 0.9955398)
+bones/8/scale = Vector3(0.99999994, 0.9999998, 1)
+bones/10/position = Vector3(-0.0038132237, 0.0055860146, -0.0017404186)
+bones/10/rotation = Quaternion(-0.20529462, -0.045806773, 0.74386847, 0.6343624)
+bones/10/scale = Vector3(1, 1.0000001, 1)
+bones/11/position = Vector3(3.0221556e-09, 0.007025025, 5.178218e-10)
+bones/11/rotation = Quaternion(0.004041143, 0.611235, 0.34167767, 0.713885)
+bones/11/scale = Vector3(1.0000001, 1.0000001, 0.99999994)
+bones/12/position = Vector3(-8.9345786e-10, 0.004402766, -2.8675085e-09)
+bones/12/rotation = Quaternion(-0.15528376, -0.004531191, 0.02563602, 0.98752683)
+bones/12/scale = Vector3(0.99999976, 0.9999997, 0.99999994)
+bones/13/position = Vector3(5.4228166e-10, 0.004204205, 3.4936862e-10)
+bones/13/rotation = Quaternion(-0.06390192, -0.063135564, -0.028827237, 0.9955398)
+bones/13/scale = Vector3(1, 1, 1.0000001)
+bones/15/position = Vector3(3.203466e-05, 0.01491416, -0.0011565945)
+bones/15/rotation = Quaternion(0.9996196, -0.012443873, -0.008295721, -0.023173423)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_tnjxb")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011840826, 2.2421136, -0.036407463)
+shape = SubResource("BoxShape3D_1r2f0")
+
+[node name="Area3D" type="Area3D" parent="." index="4"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011840826, 2.2421136, -0.036407463)
+shape = SubResource("BoxShape3D_1r2f0")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
