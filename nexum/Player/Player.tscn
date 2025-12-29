@@ -93,26 +93,26 @@ transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTrans
 script = ExtResource("2_tok1r")
 weapon_holder = NodePath("character-d/root/torso/arm-left/WeaponHolder")
 
-[node name="root" parent="character-d" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010400921, 0)
-
 [node name="leg-left" parent="character-d/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9978821, -0.06504505, 0, 0.06504505, 0.9978821, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-d/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.99788207, 0.06504518, 0, -0.06504518, 0.99788207, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.2, 1, 2.183782e-14)
 
 [node name="torso" parent="character-d/root" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.934586, 0.35573637, 0, -0.35573637, 0.934586, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 0.99999964, 0.39999998, 1.1, -0.099999994)
+
+[node name="WeaponHolder" type="Marker3D" parent="character-d/root/torso/arm-left" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.2107017, -1.2219224, 0)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.998773, -0.049522318, 0, 0.049522318, 0.998773, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.099988975, 0, 0.001484003, 0, 0.1, 0, -0.001484003, 0, 0.099988975, 0, 1.2, 0)
+transform = Transform3D(0.09999999, 0, 0, 0, 0.1, 0, 0, 0, 0.09999999, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0)
