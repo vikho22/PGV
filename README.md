@@ -40,11 +40,13 @@ https://www.kenney.nl/assets/blocky-characters
 - [ ] **Volumen**
 - [ ] **Controles**
 
+### 👤 Germán
+- [ ] **Cofres y Generación Objetos**
+- [ ] **Diversidad Objetos**
+- [ ] **Loot Enemigos**
+
 ### 🛠️ Tareas Generales / Sin Asignar
 - [ ] **Sistema de puntuación**
-- [ ] **Diversidad Objetos**
-- [ ] **Cofres y Generación Objetos**
-- [ ] **Loot Enemigos**
 - [ ] **Pulir Mapa**
 - [ ] **Interfaz**
 
