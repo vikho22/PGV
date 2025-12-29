@@ -37,3 +37,5 @@ https://www.kenney.nl/assets/blocky-characters
 - Camara Atraviesa Paredes --> Juanka
 - Pulir Mapa
 - Interfaz
+
+  \checkbox hola
