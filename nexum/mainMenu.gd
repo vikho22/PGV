@@ -17,6 +17,7 @@ func _ready() -> void:
 	jugar_button.pressed.connect(_on_jugar_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
 	logros_button.pressed.connect(_on_logros_pressed)
+	setting_button.pressed.connect(_on_settings_pressed)
 
 
 func _on_jugar_pressed() -> void:
@@ -33,3 +34,8 @@ func _on_tutorial_pressed() -> void:
 func _on_logros_pressed() -> void:
 	# Igual: por ahora mensaje
 	print("Ir a logros (pendiente de implementar)")
+
+
+func _on_settings_pressed() -> void:
+	# Pantalla de controles (remapeo)
+	get_tree().change_scene_to_file("res://Controles.tscn")
