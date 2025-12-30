@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://btsxnowvqk444"]
+
+[ext_resource type="PackedScene" uid="uid://caruk3n1lb3u6" path="res://Weapons/WeaponBase.tscn" id="1_kdpsx"]
+[ext_resource type="PackedScene" uid="uid://bgivmn2vrmfnw" path="res://Weapons/Bullets/bullet_pistol.tscn" id="2_j13yp"]
+[ext_resource type="PackedScene" uid="uid://igc60v5kt0mv" path="res://Weapons/blaster-d.fbx" id="3_kdpsx"]
+
+[node name="SMG" instance=ExtResource("1_kdpsx")]
+damage = 8
+fire_rate = 0.1
+automatic = true
+bullet_scene = ExtResource("2_j13yp")
+
+[node name="blaster-d" parent="Model" index="0" instance=ExtResource("3_kdpsx")]
+
+[node name="Muzzle" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.055389374, -0.45240015)
+
+[node name="ShootTimer" parent="." index="2"]
+wait_time = 0.001

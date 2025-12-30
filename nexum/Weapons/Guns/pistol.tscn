@@ -6,7 +6,6 @@
 
 [node name="Pistol" instance=ExtResource("1_rpex2")]
 damage = 20
-fire_rate = 0.1
 bullet_scene = ExtResource("2_2l4yv")
 
 [node name="blaster-a" parent="Model" index="0" instance=ExtResource("2_yjjn3")]

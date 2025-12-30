@@ -4,6 +4,7 @@ extends Node3D
 @export_group("Stats")
 @export var damage: int = 10
 @export var fire_rate: float = 0.5 
+@export var automatic: bool = false
 @export var bullet_scene: PackedScene 
 
 # --- REFERENCIAS ---
@@ -34,6 +35,7 @@ func shoot(target_point: Vector3 = Vector3.ZERO):
 		new_bullet.global_rotation = muzzle.global_rotation
 
 	can_shoot = false
+	timer.wait_time = fire_rate
 	timer.start()
 
 # Cuando el timer termina, podemos disparar de nuevo
