@@ -28,12 +28,12 @@ https://www.kenney.nl/assets/blocky-characters
 - [ ] **Tutorial**
 
 ### 👤 Jorge
-- [ ] **Sistema disparo**
+- [x] **Sistema disparo**
 - [ ] **Diversidad Armas**
 
 ### 👤 Juanka
 - [ ] **Diversidad Enemigos**
-- [ ] **Cámara Atraviesa Paredes**
+- [x] **Cámara Atraviesa Paredes**
 
 ### 👤 Martin
 - [ ] **Logros**
