@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://btsxnowvqk444"]
 
 [ext_resource type="PackedScene" uid="uid://caruk3n1lb3u6" path="res://Weapons/WeaponBase.tscn" id="1_kdpsx"]
-[ext_resource type="PackedScene" uid="uid://bgivmn2vrmfnw" path="res://Weapons/Bullets/bullet_pistol.tscn" id="2_j13yp"]
+[ext_resource type="PackedScene" uid="uid://bioks7gs274po" path="res://Weapons/Bullets/bullet_SMG.tscn" id="2_kdpsx"]
 [ext_resource type="PackedScene" uid="uid://igc60v5kt0mv" path="res://Weapons/blaster-d.fbx" id="3_kdpsx"]
 
 [node name="SMG" instance=ExtResource("1_kdpsx")]
 damage = 8
-fire_rate = 0.1
+fire_rate = 0.2
 automatic = true
-bullet_scene = ExtResource("2_j13yp")
+bullet_scene = ExtResource("2_kdpsx")
 
 [node name="blaster-d" parent="Model" index="0" instance=ExtResource("3_kdpsx")]
 
