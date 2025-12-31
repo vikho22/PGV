@@ -76,13 +76,14 @@ func _physics_process(delta: float) -> void:
 	if !melee and weapon != null:
 		var apretando_boton = false
 		
-		# Verificamos si el arma es automática
-		if weapon.get("automatic") == true:
-			#  Mientras este pulsado
-			apretando_boton = Input.is_action_pressed("attack")
-		else:
-			# Solo al hacer clic
-			apretando_boton = Input.is_action_just_pressed("attack")
+		# Lógica Híbrida:
+		# 1. ¿Acabas de pulsar? (Prioridad al clic inicial para disparar SIEMPRE la primera bala)
+		if Input.is_action_just_pressed("attack"):
+			apretando_boton = true
+			
+		# 2. ¿Mantienes pulsado Y el arma es automática? (Para la ráfaga continua)
+		elif Input.is_action_pressed("attack") and weapon.get("automatic") == true:
+			apretando_boton = true
 		
 		if apretando_boton:
 			rotar_hacia_mouse(delta) 
