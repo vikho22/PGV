@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2u20euaousgx"]
+
+[ext_resource type="PackedScene" uid="uid://caruk3n1lb3u6" path="res://Weapons/WeaponBase.tscn" id="1_pqd1c"]
+[ext_resource type="Script" uid="uid://bdrf6wythywl3" path="res://Scripts/weapon.gd" id="2_pqd1c"]
+[ext_resource type="PackedScene" uid="uid://cvosebfgexn42" path="res://Weapons/Bullets/bullet_shotgun.tscn" id="3_lgma0"]
+[ext_resource type="PackedScene" uid="uid://bnuup355fkkmo" path="res://Weapons/blaster-l.fbx" id="3_pqd1c"]
+
+[node name="shotgun" instance=ExtResource("1_pqd1c")]
+script = ExtResource("2_pqd1c")
+damage = 30
+bullet_scene = ExtResource("3_lgma0")
+shot_count = 3
+max_range = 2.0
+spread = 5.0
+
+[node name="blaster-l" parent="Model" index="0" instance=ExtResource("3_pqd1c")]
+
+[node name="Muzzle" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.055389374, -0.27954388)
+
+[node name="ShootTimer" parent="." index="2"]
+wait_time = 0.2

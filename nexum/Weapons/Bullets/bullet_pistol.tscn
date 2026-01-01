@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgivmn2vrmfnw"]
 
 [ext_resource type="PackedScene" uid="uid://wjf5nrgq50i3" path="res://Weapons/BulletBase.tscn" id="1_u7uj1"]
-[ext_resource type="PackedScene" uid="uid://b2efnv5fk87ll" path="res://Weapons/bullet-foam-tip.fbx" id="2_pjxhf"]
+[ext_resource type="PackedScene" uid="uid://dni2ytjtinb7c" path="res://Weapons/bullet-foam-tip.fbx" id="2_pjxhf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5hhy"]
-radius = 0.20458984
-height = 0.4091797
+radius = 0.07861328
+height = 0.35595703
 
-[node name="BulletPistol" instance=ExtResource("1_u7uj1")]
+[node name="BulletPistol2" instance=ExtResource("1_u7uj1")]
 collision_layer = 9
-speed = 60.0
 
 [node name="Visuals" parent="." index="0"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -18,7 +17,7 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, -0.009162851, -0.99995816, 0, 0.99995816, -0.009162851, 0, 0.0006876146, -0.14409374)
+transform = Transform3D(1, 0, 0, 0, -0.009162851, -0.99995816, 0, 0.99995816, -0.009162851, 0, 0.000725644, -0.14824396)
 shape = SubResource("CapsuleShape3D_e5hhy")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
