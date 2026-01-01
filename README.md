@@ -35,6 +35,7 @@ https://www.kenney.nl/assets/blocky-characters
 ### 👤 Juanka
 - [ ] **Diversidad Enemigos**
 - [x] **Cámara Atraviesa Paredes**
+- [ ] **Pulir Mapa**
 
 ### 👤 Martin
 - [ ] **Logros**
@@ -47,6 +48,5 @@ https://www.kenney.nl/assets/blocky-characters
 - [ ] **Loot Enemigos**
 
 ### 🛠️ Tareas Generales / Sin Asignar
-- [ ] **Pulir Mapa**
 - [ ] **Interfaz**
 
