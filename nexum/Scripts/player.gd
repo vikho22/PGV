@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-func add_weapon(weapon_scene: PackedScene):
+func add_weapon(weapon_scene: PackedScene, weapon_stats: Dictionary = {}):
 	# 1. Borrar arma anterior si existe
 	if weapon != null:
 		weapon.queue_free()
@@ -108,9 +108,14 @@ func add_weapon(weapon_scene: PackedScene):
 	var new_weapon = weapon_scene.instantiate()
 	weapon_holder.add_child(new_weapon)
 	
-	# 3. Actualizar referencias
+	# 3. Configurar el arma si vienen datos en la llamada
+	if not weapon_stats.is_empty() and new_weapon.has_method("configure"):
+		new_weapon.configure(weapon_stats)
+		print("Arma configurada con rareza personalizada")
+	
+	# 4. Actualizar referencias
 	weapon = new_weapon
-	melee = false # Cambiamos modo a disparo
+	melee = false 
 	print("Arma equipada: ", new_weapon.name)
 
 func take_damage(damage: float):

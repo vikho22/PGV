@@ -19,6 +19,18 @@ extends Node3D
 
 var can_shoot: bool = true
 
+func configure(stats: Dictionary):
+	damage = stats["damage"]
+	fire_rate = stats["fire_rate"]
+	spread = stats["spread"]
+	shot_count = stats["shot_count"]
+	automatic = stats["automatic"]
+	max_range = stats["max_range"]
+	
+	# Reiniciamos el timer con la nueva cadencia
+	if timer:
+		timer.wait_time = fire_rate
+
 func _ready():
 	timer.wait_time = fire_rate
 

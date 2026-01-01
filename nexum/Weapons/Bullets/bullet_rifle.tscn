@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://gypriqx1idcf"]
+
+[ext_resource type="PackedScene" uid="uid://wjf5nrgq50i3" path="res://Weapons/BulletBase.tscn" id="1_vdpe7"]
+[ext_resource type="PackedScene" uid="uid://dni2ytjtinb7c" path="res://Weapons/bullet-foam-tip.fbx" id="2_1lhrd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5hhy"]
+radius = 0.1430664
+height = 0.57458496
+
+[node name="BulletPistol2" instance=ExtResource("1_vdpe7")]
+collision_layer = 9
+
+[node name="Visuals" parent="." index="0"]
+transform = Transform3D(7.5, 0, 0, 0, 7.5, 0, 0, 0, 7.5, 0, 0, 0)
+
+[node name="bullet-foam-tip" parent="Visuals" index="0" instance=ExtResource("2_1lhrd")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.009162851, -0.99995816, 0, 0.99995816, -0.009162851, 0, 0.0014174437, -0.2237413)
+shape = SubResource("CapsuleShape3D_e5hhy")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
