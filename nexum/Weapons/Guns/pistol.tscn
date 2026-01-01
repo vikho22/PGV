@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhhqtkkpile1r"]
+
+[ext_resource type="PackedScene" uid="uid://caruk3n1lb3u6" path="res://Weapons/WeaponBase.tscn" id="1_rpex2"]
+[ext_resource type="Script" uid="uid://bdrf6wythywl3" path="res://Scripts/weapon.gd" id="2_2l4yv"]
+[ext_resource type="PackedScene" uid="uid://dgplrg5n10r8" path="res://Weapons/blaster-a.fbx" id="2_yjjn3"]
+[ext_resource type="PackedScene" uid="uid://bgivmn2vrmfnw" path="res://Weapons/Bullets/bullet_pistol.tscn" id="3_2l4yv"]
+
+[node name="Pistol" instance=ExtResource("1_rpex2")]
+script = ExtResource("2_2l4yv")
+bullet_scene = ExtResource("3_2l4yv")
+
+[node name="blaster-a" parent="Model" index="0" instance=ExtResource("2_yjjn3")]
+
+[node name="Muzzle" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.055389374, -0.37504333)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://wjf5nrgq50i3"]
+
+[ext_resource type="Script" uid="uid://lhguau2gc4wn" path="res://Scripts/Bullet.gd" id="1_n6275"]
+
+[node name="BulletBase" type="Area3D"]
+collision_mask = 8
+script = ExtResource("1_n6275")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="LifeTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
