@@ -29,7 +29,7 @@ https://www.kenney.nl/assets/blocky-characters
 
 ### 👤 Jorge
 - [x] **Sistema disparo**
-- [ ] **Diversidad Armas**
+- [x] **Diversidad Armas**
 - [ ] **Sistema de puntuación**
 
 ### 👤 Juanka
