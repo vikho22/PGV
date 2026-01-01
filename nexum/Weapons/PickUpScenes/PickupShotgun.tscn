@@ -65,7 +65,7 @@ billboard = 1
 text = "[E] Recoger Escopeta
 "
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="."]
 amount = 100
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_nre71")

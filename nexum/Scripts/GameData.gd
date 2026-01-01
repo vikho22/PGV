@@ -7,7 +7,9 @@ var weapon_stats = {
 		"spread": 0.0,
 		"shot_count": 1,
 		"automatic": false,
+		"damage_dropoff": false,
 		"max_range": 10
+		
 	},
 	"subfusil": {
 		"damage": 5,
@@ -15,6 +17,7 @@ var weapon_stats = {
 		"spread": 0.0,
 		"shot_count": 1,
 		"automatic": true,
+		"damage_dropoff": false,
 		"max_range": 10
 	},
 	"escopeta": {
@@ -23,7 +26,8 @@ var weapon_stats = {
 		"spread": 2.0,
 		"shot_count": 5,
 		"automatic": false,
-		"max_range": 2.5
+		"damage_dropoff": true,
+		"max_range": 10
 	},
 	"fusil": {
 		"damage": 17, 
@@ -31,6 +35,7 @@ var weapon_stats = {
 		"spread": 0.01,
 		"shot_count": 1,
 		"automatic": true,
+		"damage_dropoff": true,
 		"max_range": 50.0
 	}
 }

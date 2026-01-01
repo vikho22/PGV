@@ -25,6 +25,7 @@ func configure(stats: Dictionary):
 	spread = stats["spread"]
 	shot_count = stats["shot_count"]
 	automatic = stats["automatic"]
+	damage_dropoff = stats["damage_dropoff"]
 	max_range = stats["max_range"]
 	
 	# Reiniciamos el timer con la nueva cadencia
@@ -41,21 +42,17 @@ func shoot(target_point: Vector3 = Vector3.ZERO):
 	# Repetimos el proceso por cada bala que tenga el arma
 	for i in range(shot_count):
 		var new_bullet = bullet_scene.instantiate()
-		get_tree().root.add_child(new_bullet)
+		
 		
 		# 1. Posición inicial
 		new_bullet.global_position = muzzle.global_position
 		
 		# 2. Configurar datos de la bala (Daño y Distancia)
 		new_bullet.damage = damage
-		
-		# Pasamos datos extra a la bala
-		if "start_position" in new_bullet:
-			new_bullet.start_position = muzzle.global_position
-		if "max_range" in new_bullet:
-			new_bullet.max_range = max_range
-		if "damage_dropoff" in new_bullet:
-			new_bullet.damage_dropoff = damage_dropoff
+		new_bullet.start_position = muzzle.global_position
+		new_bullet.max_range = max_range
+		new_bullet.damage_dropoff = damage_dropoff
+		get_tree().root.add_child(new_bullet)
 		
 		# 3. Configuración del Spread
 		if target_point != Vector3.ZERO:
@@ -80,6 +77,8 @@ func shoot(target_point: Vector3 = Vector3.ZERO):
 			new_bullet.global_rotation = muzzle.global_rotation
 			if spread > 0:
 				new_bullet.rotate_y(deg_to_rad(randf_range(-spread * 5, spread * 5)))
+				
+		
 
 	# 4. Control de cadencia 
 	can_shoot = false
