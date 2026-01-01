@@ -55,3 +55,31 @@ func get_weapon_config(weapon_type: String, rarity: String) -> Dictionary:
 	base["damage"] = int(base["damage"] * mult)
 	
 	return base
+	
+	
+var score: int = 0
+var current_round: int = 1
+
+var enemy_scores = {
+	"zombie": 10,
+	"Demon": 20,
+	"Goleling": 500
+}
+
+#signal(score_updated)
+
+func add_kill_score(enemy_type: String):
+	# 1. Obtenemos puntos base
+	var base_points = enemy_scores.get(enemy_type, 10)
+	
+	# 2. Calculamos el Multiplicador de Ronda
+	var round_multiplier = 1.0 + (current_round * 0.1)
+	
+	# 3. Calculamos total
+	var final_points = int(base_points * round_multiplier)
+	
+	# 4. Sumamos y avisamos
+	score += final_points
+	emit_signal("score_updated", score)
+	
+	print("Muerte: ", enemy_type, " | Puntos: ", final_points, " | Total: ", score)

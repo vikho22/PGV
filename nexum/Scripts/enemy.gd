@@ -6,6 +6,7 @@ class_name Enemy
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
+@export_enum("zombie", "Demon", "Goleling") var enemy_type: String = "zombie"
 @export var speed = 2.0
 @export var strength: float = 50.0
 @export var max_health: float = 100.0
@@ -39,12 +40,14 @@ func die() -> void:
 	$CollisionShape3D.set_deferred("disabled", true)
 	
 	state_machine.travel("die")
+	GameData.add_kill_score(enemy_type)
 	
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
 
 func take_damage(damage: float):
 	print("attacked")
+	print(GameData.score)
 	if can_take_damage:
 		var health_bar := $Health/Sprite3D
 		
