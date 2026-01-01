@@ -30,6 +30,7 @@ https://www.kenney.nl/assets/blocky-characters
 ### 👤 Jorge
 - [x] **Sistema disparo**
 - [ ] **Diversidad Armas**
+- [ ] **Sistema de puntuación**
 
 ### 👤 Juanka
 - [ ] **Diversidad Enemigos**
@@ -46,7 +47,6 @@ https://www.kenney.nl/assets/blocky-characters
 - [ ] **Loot Enemigos**
 
 ### 🛠️ Tareas Generales / Sin Asignar
-- [ ] **Sistema de puntuación**
 - [ ] **Pulir Mapa**
 - [ ] **Interfaz**
 
