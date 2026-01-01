@@ -102,19 +102,19 @@ script = ExtResource("2_tok1r")
 weapon_holder = NodePath("character-d/root/torso/arm-left/WeaponHolder")
 
 [node name="root" parent="character-d" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041264497, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0067289984, 0)
 
 [node name="leg-left" parent="character-d/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.83932227, 0.54363376, 0, -0.54363376, 0.83932227, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.99861073, -0.05268939, 0, 0.05268939, 0.99861073, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-d/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.83932227, -0.54363364, 0, 0.54363364, 0.83932227, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.9986107, 0.052689295, 0, -0.052689295, 0.9986107, -0.2, 1, 2.183782e-14)
 
 [node name="torso" parent="character-d/root" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9710217, -0.23898967, 0, 0.23898967, 0.9710217, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9293855, 0.3691096, 0, -0.3691096, 0.9293855, 0.39999998, 1.1, -0.099999994)
 
 [node name="Area3D" type="Area3D" parent="character-d/root/torso/arm-left" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, -0.39999986, -1.79989, 0.10196082)
@@ -130,10 +130,10 @@ shape = SubResource("BoxShape3D_6ysni")
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.2107017, -1.2219224, 0)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.84964496, 0.52735496, 0, -0.52735496, 0.84964496, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9979595, -0.06384808, 0, 0.06384808, 0.9979595, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.096935585, 0, -0.024566012, 0, 0.1, 0, 0.024566012, 0, 0.096935585, 0, 1.2, 0)
+transform = Transform3D(0.099892765, 0, 0.0046293754, 0, 0.1, 0, -0.0046293754, 0, 0.099892765, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0.00033569336)

@@ -8,11 +8,15 @@ func _ready() -> void:
 	strength = 3
 	
 	
-	set_movement_target_position(Vector3(0,1,0))
+	set_movement_target_position(Vector3(0,0,0))
 
 
 func _physics_process(delta: float) -> void:
 	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		print("grav")
+		
 	# 1. SEGURIDAD: Si no hay jugador, no hacemos nada (evita crashes)
 	if player_target == null:
 		return
@@ -32,10 +36,16 @@ func _physics_process(delta: float) -> void:
 	if navigation.is_navigation_finished() && !onCooldowm:
 		attack()
 	
+	print("start")
 	# 3. LÓGICA DE MOVIMIENTO 
 	var current_position = global_position
 	var next_path_position = navigation.get_next_path_position()
-	var direction = (next_path_position - current_position).normalized()
+	var direction = (next_path_position - current_position)
+	direction.y = 0 
+	direction = direction.normalized()
+	print("pos", current_position)
+	print("next",next_path_position)
+	
 	
 	var moving = Vector2.ZERO
 		
@@ -45,9 +55,14 @@ func _physics_process(delta: float) -> void:
 		
 	if !navigation.is_navigation_finished():
 		moving = Vector2(1,0)
-		velocity = direction * speed
+		#velocity = direction * speed
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 
+		
 	anim_tree.set("parameters/Movement/blend_position",moving)
+	
+	print(velocity)
 	move_and_slide()
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
