@@ -6,9 +6,6 @@ func _ready() -> void:
 	navigation.target_desired_distance = 1.5
 	navigation.path_desired_distance = 0.5
 	strength = 3
-	
-
-	
 	set_movement_target_position(Vector3(0,1,0))
 
 
