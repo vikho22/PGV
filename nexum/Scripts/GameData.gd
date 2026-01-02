@@ -73,7 +73,7 @@ var enemy_scores = {
 	"Goleling": 500
 }
 
-#signal(score_updated)
+signal score_updated(score)
 
 ## Manda una señal a la UI con la puntuación actualizada
 func add_kill_score(enemy_type: String):
