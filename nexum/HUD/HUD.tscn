@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bx0dl82xxmf4o"]
 
-[ext_resource type="FontFile" uid="uid://ckjvfh1k43gbs" path="res://HUD/BlackOpsOne-Regular.ttf" id="1_b7ubu"]
-[ext_resource type="Script" uid="uid://ikilj70r5fv1" path="res://Scripts/hud.gd" id="1_k5de2"]
-[ext_resource type="Texture2D" uid="uid://dh4rxpsfjrjsw" path="res://HUD/money.png" id="3_ja1d4"]
+[ext_resource type="FontFile" uid="uid://cg4crgi2ka27a" path="res://HUD/BlackOpsOne-Regular.ttf" id="1_b7ubu"]
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_k5de2"]
+[ext_resource type="Texture2D" uid="uid://ddlrj8425ufqk" path="res://HUD/money.png" id="3_ja1d4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5xyro"]
 font = ExtResource("1_b7ubu")
