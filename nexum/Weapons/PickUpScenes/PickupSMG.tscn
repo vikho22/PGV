@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkj602i768fai"]
+
+[ext_resource type="Script" uid="uid://l1y8tfmp7pad" path="res://Scripts/pickup.gd" id="1_5rf3h"]
+[ext_resource type="PackedScene" uid="uid://btsxnowvqk444" path="res://Weapons/Guns/SMG.tscn" id="2_5rf3h"]
+[ext_resource type="PackedScene" uid="uid://igc60v5kt0mv" path="res://Weapons/blaster-d.fbx" id="3_5rf3h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nre71"]
+radius = 1.5399755
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5rf3h"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.29999998
+
+[sub_resource type="Gradient" id="Gradient_c4p0p"]
+offsets = PackedFloat32Array(0.23636363, 1)
+colors = PackedColorArray(0, 0.6147209, 0.91528577, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n6sv"]
+gradient = SubResource("Gradient_c4p0p")
+fill = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5smi"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_6n6sv")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dham3"]
+material = SubResource("StandardMaterial3D_k5smi")
+
+[node name="PickupSMG" type="Area3D"]
+collision_mask = 15
+script = ExtResource("1_5rf3h")
+weapon_scene_to_give = ExtResource("2_5rf3h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nre71")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="blaster-d" parent="MeshInstance3D" instance=ExtResource("3_5rf3h")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0.77157855, 0.74515843, 7.70092e-07, 1)
+light_energy = 100.0
+light_specular = 0.0
+light_cull_mask = 4294967294
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5012611, 0)
+pixel_size = 0.007
+billboard = 1
+text = "[E] Recoger Subfusil
+"
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 100
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_5rf3h")
+draw_pass_1 = SubResource("QuadMesh_dham3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

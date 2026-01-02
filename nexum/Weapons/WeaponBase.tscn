@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://caruk3n1lb3u6"]
+
+[ext_resource type="Script" uid="uid://crrhlifm0g5a8" path="res://Scripts/Weapon.gd" id="1_sjb7h"]
+
+[node name="WeaponBase" type="Node3D"]
+script = ExtResource("1_sjb7h")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Muzzle" type="Marker3D" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

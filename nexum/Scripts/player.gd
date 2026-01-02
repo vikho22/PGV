@@ -1,14 +1,19 @@
 extends CharacterBody3D
 class_name Player
 
+@onready var weapon_hitbox = $"character-d/root/torso/arm-left/Area3D"
 
 @onready var anim_player = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 @onready var camera = $Camera3D
+@onready var spring_arm: SpringArm3D = $SpringArm3D
+@onready var view_camera: Camera3D = get_viewport().get_camera_3d()
+@export var weapon_holder: Node3D
 
 @export var SPEED = 4.0
 @export var JUMP_VELOCITY = 5.5
+@export var strength = 10
 
 #Variables de vida:
 var max_health: float = 100.0
@@ -22,126 +27,157 @@ var melee = true
 
 const BLEND_SPEED = 10.0
 
-func rotar_hacia_mouse():
-	# 1. Obtenemos la posición del ratón en la pantalla (2D)
+func get_mouse_position_3d() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
-
-	# 2. Creamos un plano matemático horizontal (Vector3.UP) 
-	# que corta exactamente a la altura de nuestro personaje (global_position.y)
 	var drop_plane = Plane(Vector3.UP, global_position.y)
+	var ray_origin = view_camera.project_ray_origin(mouse_pos)
+	var ray_normal = view_camera.project_ray_normal(mouse_pos)
+	return drop_plane.intersects_ray(ray_origin, ray_normal)
 
-	# 3. Proyectamos un rayo desde la cámara
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_normal = camera.project_ray_normal(mouse_pos)
-
-	# 4. Calculamos dónde choca ese rayo con nuestro plano imaginario
-	var intersection_point = drop_plane.intersects_ray(ray_origin, ray_normal)
-
-	# 5. Si hay intersección (el ratón está sobre el mundo visible), rotamos
+func rotar_hacia_mouse(delta: float):
+	var intersection_point = get_mouse_position_3d()
+	
 	if intersection_point:
-		look_at(intersection_point, Vector3.UP)
+		var look_direction = intersection_point - global_position
+		var target_angle = atan2(look_direction.x, look_direction.z)
+		rotation.y = lerp_angle(rotation.y, target_angle, delta * 10.0)
 
 func _physics_process(delta: float) -> void:
-	# Aplicar gravedad
+	# 1. Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	var current_state = state_machine.get_current_node()
-	
-	if current_state == "attack" or current_state == "shoot":
-		velocity = Vector3.ZERO
-		move_and_slide()
-		return
-	
-	
-	# Salto
+	# 2. Salto
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	var direction = Vector3.ZERO
-
-	# Movimiento en plano XZ
-	if Input.is_action_pressed("left"):
-		direction.x -= 1
-	if Input.is_action_pressed("right"):
-		direction.x += 1
-	if Input.is_action_pressed("forward"):
-		direction.z -= 1
-	if Input.is_action_pressed("backward"):
-		direction.z += 1
-
-	# Normaliza para que la velocidad sea constante incluso en diagonal
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		# Calcula rotación hacia el movimiento
-		var target_rotation = atan2(direction.x, direction.z)
-		rotation.y = lerp_angle(rotation.y, target_rotation, 0.2)
 		
-	camera.top_level = true 
-	camera.global_position = global_position + Vector3(0, 15, 5)
+	# 3. Movimiento
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 	
-	camera.global_rotation.y = deg_to_rad(0) 
-	camera.global_rotation.x = deg_to_rad(-60) 
+	if direction != Vector3.ZERO:
+		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 1))
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0, 0))
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
-	var horizontal_velocity = direction * SPEED
-	velocity.x = horizontal_velocity.x
-	velocity.z = horizontal_velocity.z
-	
-	anim_tree.set("parameters/BlendTree/Movement/blend_position", Vector2(0,1 if velocity.length() > 0 else 0))
+	# 4. Rotación
+	# Si estamos atacando, miramos al ratón. Si corremos, miramos al frente.
+	if !anim_tree.get("parameters/BlendTree/AttackType/active"):
+		if direction != Vector3.ZERO:
+			var target_rotation = atan2(direction.x, direction.z)
+			rotation.y = lerp_angle(rotation.y, target_rotation, 0.15)
+	else:
+		rotar_hacia_mouse(delta)
+
+	if !melee and weapon != null:
+		var apretando_boton = false
+		
+		# Lógica Híbrida:
+		# 1. ¿Acabas de pulsar? (Prioridad al clic inicial para disparar SIEMPRE la primera bala)
+		if Input.is_action_just_pressed("attack"):
+			apretando_boton = true
+			
+		# 2. ¿Mantienes pulsado Y el arma es automática? (Para la ráfaga continua)
+		elif Input.is_action_pressed("attack") and weapon.get("automatic") == true:
+			apretando_boton = true
+		
+		if apretando_boton:
+			rotar_hacia_mouse(delta) 
+			realizar_disparo()
+
+	var move_speed = Vector2(velocity.x,velocity.z).length()
 	
 	if !melee:
-		var target_hold = 0.0 if velocity.length() > 0 else 1.0
-		
+		var target_hold = 0.0 if move_speed > 0 else 1.0
 		var current_hold = anim_tree.get("parameters/BlendTree/Blend2/blend_amount")
-		
 		var new_hold = lerp(float(current_hold), target_hold, delta * BLEND_SPEED)
-		
 		anim_tree.set("parameters/BlendTree/Blend2/blend_amount", new_hold)
 	
-	var has_collision = move_and_slide()
-	take_damage(has_collision)
+	move_and_slide()
+	
+func add_weapon(weapon_scene: PackedScene, weapon_stats: Dictionary = {}):
+	# 1. Borrar arma anterior si existe
+	if weapon != null:
+		weapon.queue_free()
 
-func take_damage(has: bool):
-	if can_take_damage and has:
-		for i in range(get_slide_collision_count()):
-			if get_slide_collision(i).get_collider() is CharacterBody3D:
-				var damage := 10
+	# 2. Instanciar nueva arma
+	var new_weapon = weapon_scene.instantiate()
+	weapon_holder.add_child(new_weapon)
+	
+	# 3. Configurar el arma si vienen datos en la llamada
+	if not weapon_stats.is_empty() and new_weapon.has_method("configure"):
+		new_weapon.configure(weapon_stats)
+		print("Arma configurada con rareza personalizada")
+	
+	# 4. Actualizar referencias
+	weapon = new_weapon
+	melee = false 
+	print("Arma equipada: ", new_weapon.name)
 
-				var shield := $DataBars/Shield/Sprite3D
-				var health := $DataBars/Health/Sprite3D
-				
-				
-				if shield.real_value > 0:
-					shield.take_damage(damage)
+func take_damage(damage: float):
+	var shield := $DataBars/Shield/Sprite3D
+	var health := $DataBars/Health/Sprite3D
+	
+	if shield.real_value > 0:
+		shield.take_damage(damage)
+		current_shield -= max(0,damage)
+		if shield.real_value <= 0:
+			var leftover = -shield.real_value
+			if leftover > 0:
+				health.take_damage(leftover)
+				current_health -= leftover
+	else:
+		health.take_damage(damage)
+		current_health -= damage
+	
+	if current_health <= 0:
+		die()
+		return
+	
+	can_take_damage = false
+	await get_tree().create_timer(damage_timeout).timeout
+	can_take_damage = true
+	
+func die():
+	if not is_physics_processing():
+		return
+	set_physics_process(false) 
+	velocity = Vector3.ZERO    
 
-					if shield.real_value <= 0:
-						var leftover = -shield.real_value
-						if leftover > 0:
-							health.take_damage(leftover)
-
-				else:
-					health.take_damage(damage)
-				
-				can_take_damage = false
-				await get_tree().create_timer(damage_timeout).timeout
-				can_take_damage = true
-				break
-				
-				
-
-func _on_sprite_3d_no_hp_left() -> void:
+	$CollisionShape3D.set_deferred("disabled", true)
+	
+	state_machine.travel("die") 
+	
+	await get_tree().create_timer(2.0).timeout
 	queue_free()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
-		var current_state = state_machine.get_current_node()
-		
-		if current_state != "attack" and current_state != "shoot":
+		if !anim_tree.get("parameters/BlendTree/AttackType/active"):
 			if melee:
-				state_machine.travel("attack")
-			else:
-				state_machine.travel("shoot")
-
+				# 1. Le decimos al AnimationTree que cambie a la rama de "attack"
+				anim_tree.set("parameters/BlendTree/Transition/transition_request", "attack")
+				
+				# 2. Disparamos la animación (OneShot)
+				anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			
+				# 3. Lógica de la Hitbox (Sincronización del daño con el movimiento del brazo)
+				await get_tree().create_timer(0.2).timeout
+				
+				# Activamos la detección de colisiones del arma/puño
+				if weapon_hitbox: 
+					weapon_hitbox.monitoring = true
+				
+				await get_tree().create_timer(0.2).timeout
+				
+				if weapon_hitbox:
+					weapon_hitbox.monitoring = false
+				
+				
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
 	$DataBars/Health/Sprite3D.heal(amount)
@@ -149,3 +185,25 @@ func heal(amount: float) -> void:
 func get_shield(amount: float) -> void:
 	current_shield = min(current_shield + amount, max_shield)
 	$DataBars/Shield/Sprite3D.get_shield(amount)
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	var target = area.get_parent()
+	print("attacked")
+	if target.has_method("take_damage"):
+		target.take_damage(strength)
+		set_deferred("monitoring", false)
+		
+		
+func realizar_disparo():
+	# Activar animación
+	anim_tree.set("parameters/BlendTree/Transition/transition_request", "shoot")
+	anim_tree.set("parameters/BlendTree/AttackType/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+	# Ordenar al arma disparar
+	if weapon.has_method("shoot"):
+		var target = get_mouse_position_3d()
+		if target:
+			weapon.shoot(target)
+		else:
+			weapon.shoot()
