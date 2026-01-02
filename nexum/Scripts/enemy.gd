@@ -6,7 +6,7 @@ class_name Enemy
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
-@export var speed = 2.0
+@export var speed = 4.0
 @export var strength: float = 50.0
 @export var max_health: float = 100.0
 var health: float = 100.0

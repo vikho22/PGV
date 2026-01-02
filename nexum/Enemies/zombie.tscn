@@ -54,7 +54,7 @@ states/die/position = Vector2(584, 200)
 transitions = ["Movement", "attack", SubResource("AnimationNodeStateMachineTransition_matev"), "attack", "Movement", SubResource("AnimationNodeStateMachineTransition_asmuy"), "Start", "Movement", SubResource("AnimationNodeStateMachineTransition_k4t3d"), "Movement", "die", SubResource("AnimationNodeStateMachineTransition_vv27w")]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nckgq"]
-size = Vector3(1.5996704, 2.8467865, 0.80752563)
+size = Vector3(1.6, 2.85, 0.808)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nvmcy"]
 viewport_path = NodePath("SubViewport")
@@ -66,16 +66,16 @@ script = ExtResource("2_7toqp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.088428415, 0)
 
 [node name="leg-left" parent="character-l/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.5958198, -0.80311805, 0, 0.80311805, 0.5958198, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.5585907, -0.8294433, 0, 0.8294433, 0.5585907, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-l/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.59581995, 0.80311805, 0, -0.80311805, 0.59581995, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.5585908, 0.82944334, 0, -0.82944334, 0.5585908, -0.2, 1, 2.183782e-14)
 
 [node name="arm-left" parent="character-l/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.51268345, 0.85857755, 0, -0.85857755, 0.51268345, 0.39999986, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.5188709, 0.85485244, 0, -0.85485244, 0.5188709, 0.39999986, 1.1, -0.099999905)
 
 [node name="arm-right" parent="character-l/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.5126833, -0.85857755, 0, 0.85857755, 0.5126833, -0.4000001, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.51887065, -0.8548525, 0, 0.8548525, 0.51887065, -0.4000001, 1.1, -0.099999905)
 
 [node name="Area3D" type="Area3D" parent="character-l/root/torso/arm-right" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, 0.4000001, -1.79989, 0.10196082)
@@ -88,7 +88,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.5973995, 0.93436676,
 shape = SubResource("BoxShape3D_eq8ey")
 
 [node name="head" parent="character-l/root/torso" index="2"]
-transform = Transform3D(0.09706129, 0, 0.024064638, 0, 0.10000001, 0, -0.024064632, 0, 0.09706131, 0, 1.2, 0)
+transform = Transform3D(0.0972081, 0, 0.02346457, 0, 0.10000001, 0, -0.023464566, 0, 0.09720812, 0, 1.2, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eq8ey")
@@ -96,7 +96,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Movement/blend_position = Vector2(0.98732173, 0.013452888)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008239746, 1.4298893, 0.0013275146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.425, 0)
 shape = SubResource("BoxShape3D_nckgq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4"]
