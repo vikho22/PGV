@@ -6,6 +6,7 @@ class_name Enemy
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
+## Tipos de enemigos aceptados a 1/1/2026
 @export_enum("zombie", "Demon", "Goleling") var enemy_type: String = "zombie"
 @export var speed = 2.0
 @export var strength: float = 50.0
