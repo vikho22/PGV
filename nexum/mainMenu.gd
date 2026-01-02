@@ -25,9 +25,7 @@ func _on_jugar_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	# Por ahora solo mostramos algo en la consola
-	# luego aquí puedes cambiar de escena a un Tutorial.tscn
-	print("Ir al tutorial (pendiente de implementar)")
+	get_tree().change_scene_to_file("res://Tutorial/nivel_tutorial.tscn")
 
 
 func _on_logros_pressed() -> void:

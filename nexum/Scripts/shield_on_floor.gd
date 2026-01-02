@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+
 @export var shield_amount: float = 25.0
 var rotation_speed: float = 1.5
 var max_rotation_speed: float = 20.0
@@ -29,7 +30,10 @@ func _on_Area3D_body_entered(body: Node) -> void:
 		return
 	if body is CharacterBody3D:
 		activated = true
-		
+		var manager = get_tree().get_first_node_in_group("Tutorial")
+		if manager:
+			manager.complete_step(manager.Steps.SHIELD)
+
 		if body.has_method("get_shield"):
 			body.get_shield(shield_amount)
 			

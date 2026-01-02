@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnbfuol0lhh8l"]
 
-[ext_resource type="Script" path="res://mainMenu.gd" id="1_h7a2f"]
-[ext_resource type="Texture2D" path="res://Images/Cover.jpg" id="1_i26rj"]
-[ext_resource type="AudioStream" path="res://Music/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3" id="2_eiy7p"]
+[ext_resource type="Script" uid="uid://wf8m0uh5rg6" path="res://mainMenu.gd" id="1_h7a2f"]
+[ext_resource type="Texture2D" uid="uid://b1c5ejdk4q6w6" path="res://Images/Cover.jpg" id="1_i26rj"]
+[ext_resource type="AudioStream" uid="uid://b73pvh51t1nur" path="res://Music/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3" id="2_eiy7p"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

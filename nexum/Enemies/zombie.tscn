@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bxuani1547iis"]
 
-[ext_resource type="PackedScene" uid="uid://cp60x67lsrlss" path="res://Models/character-l.fbx" id="1_m4rhk"]
+[ext_resource type="PackedScene" uid="uid://cirtd87bgt8r7" path="res://Models/character-l.fbx" id="1_m4rhk"]
 [ext_resource type="Script" uid="uid://bjvpq7v24ak61" path="res://Scripts/zombie.gd" id="2_7toqp"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_5xe6q"]
 
@@ -62,17 +62,17 @@ viewport_path = NodePath("SubViewport")
 [node name="character-l" instance=ExtResource("1_m4rhk")]
 script = ExtResource("2_7toqp")
 
-[node name="root" parent="character-l" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.05, 0)
+[node name="torso" parent="character-l/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.99941367, -0.034239102, 0, 0.034239102, 0.99941367, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-l/root/torso" index="0"]
-transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, 0.39999986, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.9947271, -0.10255675, 0, 0.10255675, 0.9947271, 0.39999986, 1.1, -0.099999905)
 
 [node name="arm-right" parent="character-l/root/torso" index="1"]
-transform = Transform3D(1, 8.753126e-08, 8.74227e-08, 8.7422706e-08, -0.99999917, 0.0012410326, 8.753127e-08, -0.0012410326, -0.99999917, -0.4000001, 1.1, -0.099999905)
+transform = Transform3D(1, 0, 0, 0, 0.9947271, -0.10255675, 0, 0.10255675, 0.9947271, -0.4000001, 1.1, -0.099999905)
 
 [node name="head" parent="character-l/root/torso" index="2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.10000001, 0, 0, 0, 0.10000002, 0, 1.2, 0)
+transform = Transform3D(0.09947272, 0, -0.010255676, 0, 0.10000001, 0, 0.010255675, 0, 0.09947273, 0, 1.2, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eq8ey")
@@ -86,6 +86,8 @@ shape = SubResource("BoxShape3D_nckgq")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4"]
 path_desired_distance = 0.1
 target_desired_distance = 0.1
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.015686275, 0.011764706, 1)
 
 [node name="DetectorJugador" type="Area3D" parent="." index="5"]
 collision_layer = 6

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjw6ktfpi2vit"]
 
-[ext_resource type="Script" path="res://Scripts/shield_on_floor.gd" id="1_wefo7"]
-[ext_resource type="PackedScene" uid="uid://dwv52bgnmwdur" path="res://Healing/bottle-oil.fbx" id="2_gicx8"]
+[ext_resource type="Script" uid="uid://cdka1j6xndsfy" path="res://Scripts/shield_on_floor.gd" id="1_wefo7"]
+[ext_resource type="PackedScene" uid="uid://b406yvaw24lrp" path="res://Healing/bottle-oil.fbx" id="2_gicx8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ysnvc"]
 height = 0.70892334

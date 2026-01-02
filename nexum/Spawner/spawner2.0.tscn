@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxexo8jxi5heu"]
+
+[ext_resource type="Script" uid="uid://kg0uibqvlv8j" path="res://Spawner/spawner_2.0.gd" id="1_cab2j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iv5c6"]
+radius = 3.0
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_cab2j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_iv5c6")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

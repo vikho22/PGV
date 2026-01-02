@@ -1,19 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkep3cjgp021n"]
+[gd_scene load_steps=24 format=3 uid="uid://b3mi2ylce8myy"]
 
-[ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://crasywkns4el2" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 [ext_resource type="Script" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
-[ext_resource type="PackedScene" path="res://Player/shieldbar.tscn" id="4_ddoul"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
-size = Vector3(1.6169434, 2.7216644, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_6ysni"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
-viewport_path = NodePath("SubViewport")
+[ext_resource type="PackedScene" uid="uid://dbyxgr1dj38ce" path="res://Player/shieldbar.tscn" id="4_ddoul"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tok1r"]
 filter_enabled = true
@@ -83,26 +74,41 @@ states/shoot/node = SubResource("AnimationNodeAnimation_s1rgi")
 states/shoot/position = Vector2(537, 197)
 transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_0j2ni"), "BlendTree", "attack", SubResource("AnimationNodeStateMachineTransition_ddoul"), "attack", "BlendTree", SubResource("AnimationNodeStateMachineTransition_8g4oa"), "BlendTree", "shoot", SubResource("AnimationNodeStateMachineTransition_j23h2"), "shoot", "BlendTree", SubResource("AnimationNodeStateMachineTransition_v0k0e")]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
+size = Vector3(1.6169434, 2.7216644, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ysni"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
+viewport_path = NodePath("SubViewport")
+
 [node name="character-d" instance=ExtResource("1_xhfnw")]
 script = ExtResource("2_tok1r")
 
 [node name="torso" parent="character-d/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.99970716, 0.024193833, 0, -0.024193833, 0.99970716, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.93151855, 0.3636938, 0, -0.3636938, 0.93151855, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9515246, 0.3075726, 0, -0.3075726, 0.9515246, 0.39999998, 1.1, -0.099999994)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9983144, 0.058038253, 0, -0.058038253, 0.9983144, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99999887, -0.0015183892, 0, 0.0015183892, 0.99999887, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.09973665, 0, 0.0072524888, 0, 0.1, 0, -0.0072524888, 0, 0.09973665, 0, 1.2, 0)
+transform = Transform3D(0.09999981, 0, -0.00018979855, 0, 0.1, 0, 0.00018979855, 0, 0.09999981, 0, 1.2, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_tok1r")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendTree/Movement/blend_position = Vector2(0, 0)
+parameters/BlendTree/Blend2/blend_amount = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0)
 shape = SubResource("BoxShape3D_ddoul")
 
-[node name="DataBars" type="Node3D" parent="." index="3"]
+[node name="DataBars" type="Node3D" parent="." index="4"]
 transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86958975, 0.08698356, 2.8101664, -0.53695333)
 
 [node name="Shield" type="Node3D" parent="DataBars" index="0"]
@@ -119,11 +125,5 @@ max_shield = 100
 transform = Transform3D(0.8693225, 0, -0.49424535, 0, 1, 0, 0.49424535, 0, 0.8693225, -0.33689624, 0.20813084, 0.3469968)
 texture = SubResource("ViewportTexture_8g4oa")
 
-[node name="Camera3D" type="Camera3D" parent="." index="4"]
+[node name="Camera3D" type="Camera3D" parent="." index="5"]
 transform = Transform3D(-1, 0, -8.742278e-08, -3.1229785e-08, 0.93401754, 0.3572271, 8.1654406e-08, 0.3572271, -0.93401754, 0, 3.536886, -4.6001844)
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
-tree_root = SubResource("AnimationNodeStateMachine_tok1r")
-anim_player = NodePath("../AnimationPlayer")
-parameters/BlendTree/Movement/blend_position = Vector2(0, 0)
-parameters/BlendTree/Blend2/blend_amount = 0.2

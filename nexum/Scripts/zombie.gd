@@ -29,6 +29,8 @@ func _ready() -> void:
 	max_agent.target_desired_distance = 2
 	max_agent.path_desired_distance = 0.5
 	
+	await get_tree().physics_frame
+	
 	set_movement_target_position(target_position)
 
 

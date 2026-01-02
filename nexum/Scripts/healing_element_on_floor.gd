@@ -29,9 +29,13 @@ func _on_Area3D_body_entered(body: Node) -> void:
 		return
 	if body is CharacterBody3D:
 		activated = true
-		
+		var manager = get_tree().get_first_node_in_group("Tutorial")
+		if manager:
+			manager.complete_step(manager.Steps.OBJECTS)
+
 		if body.has_method("heal"):
 			body.heal(heal_amount)
-			
+
 		await get_tree().create_timer(1.0).timeout
+		set_deferred("monitoring", false) # Desactiva el área primero
 		queue_free()
