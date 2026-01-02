@@ -49,4 +49,6 @@ https://www.kenney.nl/assets/blocky-characters
 
 ### 🛠️ Tareas Generales / Sin Asignar
 - [ ] **Interfaz**
+- [ ] **Lógica del Juego (Rondas, Enemigos por Ronda, Tipo de Enemigos por Ronda)**
+- [ ] **Sonidos**
 
