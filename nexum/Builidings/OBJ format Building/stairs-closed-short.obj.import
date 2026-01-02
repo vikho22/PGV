@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bv4vlam1x7x56"
+path="res://.godot/imported/stairs-closed-short.obj-79f2c3f3e26c4286e597422dcca1fefa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stairs-closed-short.obj-79f2c3f3e26c4286e597422dcca1fefa.mesh"]
+
+source_file="res://Builidings/OBJ format Building/stairs-closed-short.obj"
+dest_files=["res://.godot/imported/stairs-closed-short.obj-79f2c3f3e26c4286e597422dcca1fefa.mesh", "res://.godot/imported/stairs-closed-short.obj-79f2c3f3e26c4286e597422dcca1fefa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

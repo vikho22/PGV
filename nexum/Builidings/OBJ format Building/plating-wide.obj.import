@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csnbgv7s7b2pw"
+path="res://.godot/imported/plating-wide.obj-3b6dd054d794d5d32d6c55f84f46cfb2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plating-wide.obj-3b6dd054d794d5d32d6c55f84f46cfb2.mesh"]
+
+source_file="res://Builidings/OBJ format Building/plating-wide.obj"
+dest_files=["res://.godot/imported/plating-wide.obj-3b6dd054d794d5d32d6c55f84f46cfb2.mesh", "res://.godot/imported/plating-wide.obj-3b6dd054d794d5d32d6c55f84f46cfb2.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

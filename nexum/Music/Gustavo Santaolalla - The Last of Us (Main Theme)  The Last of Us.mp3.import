@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b73pvh51t1nur"
+path="res://.godot/imported/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3-4f943cb2e6b28209a3a913851eb18414.mp3str"
+
+[deps]
+
+source_file="res://Music/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3"
+dest_files=["res://.godot/imported/Gustavo Santaolalla - The Last of Us (Main Theme)  The Last of Us.mp3-4f943cb2e6b28209a3a913851eb18414.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
