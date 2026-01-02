@@ -7,14 +7,10 @@ func _ready() -> void:
 	navigation.path_desired_distance = 0.5
 	strength = 3
 	
-<<<<<<< HEAD
-	await get_tree().physics_frame
-	
-	set_movement_target_position(target_position)
-=======
+
 	
 	set_movement_target_position(Vector3(0,1,0))
->>>>>>> origin/Develop
+
 
 
 func _physics_process(delta: float) -> void:
