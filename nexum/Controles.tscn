@@ -1,0 +1,142 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5cew70fkmom8"]
+
+[ext_resource type="Texture2D" uid="uid://b1c5ejdk4q6w6" path="res://Images/Cover.jpg" id="1_2ytnu"]
+[ext_resource type="Script" path="res://Scripts/Controles.gd" id="2_controls"]
+
+[node name="Controles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_controls")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2ytnu")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -260.0
+offset_right = 330.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Selecciona una acción para cambiar su tecla."
+autowrap_mode = 3
+
+[node name="RowLeft" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover izquierda"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A"
+horizontal_alignment = 2
+
+[node name="RowRight" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover derecha"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "D"
+horizontal_alignment = 2
+
+[node name="RowForward" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowForward"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover adelante"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowForward"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "W"
+horizontal_alignment = 2
+
+[node name="RowBackward" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowBackward"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover atrás"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowBackward"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "S"
+horizontal_alignment = 2
+
+[node name="RowJump" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowJump"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Saltar"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowJump"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Space"
+horizontal_alignment = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Reset" type="Button" parent="Panel/VBox/Buttons"]
+layout_mode = 2
+text = "Restablecer"
+
+[node name="Back" type="Button" parent="Panel/VBox/Buttons"]
+layout_mode = 2
+text = "Volver"
