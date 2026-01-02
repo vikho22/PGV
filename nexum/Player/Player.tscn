@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://cbamc4hkrjmp6"]
 
-[ext_resource type="PackedScene" uid="uid://ddstckrtjx7ck" path="res://Models/character-d.fbx" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://crasywkns4el2" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
 [ext_resource type="Script" uid="uid://d0d5awbbg10ie" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
@@ -127,7 +127,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 1.1641532e-10, 0, -1.1641532e-10, 1.5
 shape = SubResource("BoxShape3D_6ysni")
 
 [node name="WeaponHolder" type="Marker3D" parent="character-d/root/torso/arm-left" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.2107017, -1.2219224, 0)
+transform = Transform3D(-1, 8.742276e-08, 3.82137e-15, 0, -4.371138e-08, 0.9999998, 8.742278e-08, 0.9999998, 4.371138e-08, 0.2107017, -1.2219224, 0)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.7101425, 0.7040579, 0, -0.7040579, 0.7101425, -0.4000001, 1.1, -0.099999994)
