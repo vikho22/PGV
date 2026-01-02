@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-[gd_scene load_steps=24 format=3 uid="uid://b3mi2ylce8myy"]
-=======
-[gd_scene load_steps=26 format=3 uid="uid://cbamc4hkrjmp6"]
->>>>>>> origin/Develop
+[gd_scene load_steps=26 format=3 uid="uid://b3mi2ylce8myy"]
 
 [ext_resource type="PackedScene" uid="uid://crasywkns4el2" path="res://Models/character-d.fbx" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cffbtlw20u75c" path="res://Scripts/player.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://cxakgkyja58j3" path="res://Player/healthbar.tscn" id="3_tok1r"]
-<<<<<<< HEAD
-[ext_resource type="Script" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
-[ext_resource type="PackedScene" uid="uid://dbyxgr1dj38ce" path="res://Player/shieldbar.tscn" id="4_ddoul"]
-=======
 [ext_resource type="Script" uid="uid://d0d5awbbg10ie" path="res://Scripts/shieldbar.gd" id="4_8g4oa"]
 [ext_resource type="PackedScene" uid="uid://d27tj8y0adgty" path="res://Player/shieldbar.tscn" id="4_ddoul"]
 [ext_resource type="Script" uid="uid://ddqy70tqlh6qy" path="res://Player/spring_arm_3d.gd" id="6_6ysni"]
@@ -26,7 +18,6 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
 viewport_path = NodePath("SubViewport")
->>>>>>> origin/Develop
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j23h2"]
 animation = &"holding-left-shoot"
@@ -99,18 +90,6 @@ states/BlendTree/node = SubResource("AnimationNodeBlendTree_j23h2")
 states/BlendTree/position = Vector2(435, 100)
 transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_0j2ni")]
 
-<<<<<<< HEAD
-[sub_resource type="BoxShape3D" id="BoxShape3D_ddoul"]
-size = Vector3(1.6169434, 2.7216644, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_6ysni"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8g4oa"]
-viewport_path = NodePath("SubViewport")
-
-[node name="character-d" instance=ExtResource("1_xhfnw")]
-=======
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6ysni"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8g4oa"]
@@ -119,46 +98,20 @@ size = Vector3(1.6190491, 2.7250977, 0.81677246)
 [node name="character-d" node_paths=PackedStringArray("weapon_holder") instance=ExtResource("1_xhfnw")]
 collision_layer = 3
 collision_mask = 3
->>>>>>> origin/Develop
 script = ExtResource("2_tok1r")
 weapon_holder = NodePath("character-d/root/torso/arm-left/WeaponHolder")
 
-[node name="root" parent="character-d" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08959908, 0)
-
 [node name="leg-left" parent="character-d/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.50203806, 0.8648453, 0, -0.8648453, 0.50203806, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-d/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.502038, -0.8648452, 0, 0.8648452, 0.502038, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.2, 1, 2.183782e-14)
 
 [node name="torso" parent="character-d/root" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-<<<<<<< HEAD
-transform = Transform3D(1, 0, 0, 0, 0.9515246, 0.3075726, 0, -0.3075726, 0.9515246, 0.39999998, 1.1, -0.099999994)
-
-[node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.99999887, -0.0015183892, 0, 0.0015183892, 0.99999887, -0.4000001, 1.1, -0.099999994)
-
-[node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.09999981, 0, -0.00018979855, 0, 0.1, 0, 0.00018979855, 0, 0.09999981, 0, 1.2, 0)
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_tok1r")
-anim_player = NodePath("../AnimationPlayer")
-parameters/BlendTree/Movement/blend_position = Vector2(0, 0)
-parameters/BlendTree/Blend2/blend_amount = 0.2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0)
-shape = SubResource("BoxShape3D_ddoul")
-
-[node name="DataBars" type="Node3D" parent="." index="4"]
-transform = Transform3D(0.86958975, 0, 0.49377495, 0, 1, 0, -0.49377495, 0, 0.86958975, 0.08698356, 2.8101664, -0.53695333)
-=======
-transform = Transform3D(1, 0, 0, 0, 0.8929511, -0.45015278, 0, 0.45015278, 0.8929511, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0.39999998, 1.1, -0.099999994)
 
 [node name="Area3D" type="Area3D" parent="character-d/root/torso/arm-left" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, -0.39999986, -1.79989, 0.10196082)
@@ -174,10 +127,10 @@ shape = SubResource("BoxShape3D_6ysni")
 transform = Transform3D(-1, 8.742276e-08, 3.82137e-15, 0, -4.371138e-08, 0.9999998, 8.742278e-08, 0.9999998, 4.371138e-08, 0.2107017, -1.2219224, 0)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.7101425, 0.7040579, 0, -0.7040579, 0.7101425, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.09807511, 0, -0.019526122, 0, 0.1, 0, 0.019526122, 0, 0.09807511, 0, 1.2, 0)
+transform = Transform3D(0.09999998, 0, 0, 0, 0.1, 0, 0, 0, 0.09999998, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0.00033569336)
@@ -185,7 +138,6 @@ shape = SubResource("BoxShape3D_ddoul")
 
 [node name="DataBars" type="Node3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
->>>>>>> origin/Develop
 
 [node name="Shield" type="Node3D" parent="DataBars" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -201,10 +153,6 @@ max_shield = 100
 [node name="Sprite3D" parent="DataBars/Health" index="0" instance=ExtResource("3_tok1r")]
 texture = SubResource("ViewportTexture_8g4oa")
 
-<<<<<<< HEAD
-[node name="Camera3D" type="Camera3D" parent="." index="5"]
-transform = Transform3D(-1, 0, -8.742278e-08, -3.1229785e-08, 0.93401754, 0.3572271, 8.1654406e-08, 0.3572271, -0.93401754, 0, 3.536886, -4.6001844)
-=======
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource("AnimationNodeStateMachine_tok1r")
 anim_player = NodePath("../AnimationPlayer")
@@ -238,4 +186,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002609253, 1.3557129, -0.00
 shape = SubResource("BoxShape3D_8g4oa")
 
 [connection signal="area_entered" from="character-d/root/torso/arm-left/Area3D" to="." method="_on_area_3d_area_entered"]
->>>>>>> origin/Develop
