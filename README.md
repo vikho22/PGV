@@ -20,19 +20,33 @@ https://kenney.nl/assets/modular-buildings
 ### Personajes
 https://www.kenney.nl/assets/blocky-characters
 
-## Tareas
-- Sistema disparo - Jorge
-- Sistema de puntuación 
-- Spawn de Enmigos - Javier
-- Rutas de Spawn - Javier
-- Diversidad Enemigos - Juanka
-- Diversidad Objetos 
-- Diversidad Armas - Jorge
-- Cofres 
-- Loot Enemigos
-- Tutorial - Javier
-- Logros - Martin
-- Volumen - Martin
-- Controles - Martin
-- Camara Atraviesa Paredes - Juanka
-- Pulir Mapa
+## Lista de Tareas (Por Responsable)
+
+### 👤 Javier
+- [ ] **Spawn de Enemigos**
+- [ ] **Rutas de Spawn**
+- [ ] **Tutorial**
+
+### 👤 Jorge
+- [x] **Sistema disparo**
+- [ ] **Diversidad Armas**
+- [ ] **Sistema de puntuación**
+
+### 👤 Juanka
+- [ ] **Diversidad Enemigos**
+- [x] **Cámara Atraviesa Paredes**
+- [ ] **Pulir Mapa**
+
+### 👤 Martin
+- [ ] **Logros**
+- [ ] **Volumen**
+- [ ] **Controles**
+
+### 👤 Germán
+- [ ] **Cofres y Generación Objetos**
+- [ ] **Diversidad Objetos**
+- [ ] **Loot Enemigos**
+
+### 🛠️ Tareas Generales / Sin Asignar
+- [ ] **Interfaz**
+
