@@ -101,17 +101,20 @@ collision_mask = 3
 script = ExtResource("2_tok1r")
 weapon_holder = NodePath("character-d/root/torso/arm-left/WeaponHolder")
 
+[node name="root" parent="character-d" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08959908, 0)
+
 [node name="leg-left" parent="character-d/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.2, 1, 2.0348877e-14)
+transform = Transform3D(1, 0, 0, 0, 0.50203806, 0.8648453, 0, -0.8648453, 0.50203806, 0.2, 1, 2.0348877e-14)
 
 [node name="leg-right" parent="character-d/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.2, 1, 2.183782e-14)
+transform = Transform3D(1, 0, 0, 0, 0.502038, -0.8648452, 0, 0.8648452, 0.502038, -0.2, 1, 2.183782e-14)
 
 [node name="torso" parent="character-d/root" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.7, 0)
 
 [node name="arm-left" parent="character-d/root/torso" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 0.99999964, 0.39999998, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.8929511, -0.45015278, 0, 0.45015278, 0.8929511, 0.39999998, 1.1, -0.099999994)
 
 [node name="Area3D" type="Area3D" parent="character-d/root/torso/arm-left" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0.0010894275, 0, -0.0010894275, 0.99999946, -0.39999986, -1.79989, 0.10196082)
@@ -127,10 +130,10 @@ shape = SubResource("BoxShape3D_6ysni")
 transform = Transform3D(-1, 8.742276e-08, 3.82137e-15, 0, -4.371138e-08, 0.9999998, 8.742278e-08, 0.9999998, 4.371138e-08, 0.2107017, -1.2219224, 0)
 
 [node name="arm-right" parent="character-d/root/torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.4000001, 1.1, -0.099999994)
+transform = Transform3D(1, 0, 0, 0, 0.7101425, 0.7040579, 0, -0.7040579, 0.7101425, -0.4000001, 1.1, -0.099999994)
 
 [node name="head" parent="character-d/root/torso" index="2"]
-transform = Transform3D(0.09999998, 0, 0, 0, 0.1, 0, 0, 0, 0.09999998, 0, 1.2, 0)
+transform = Transform3D(0.09807511, 0, -0.019526122, 0, 0.1, 0, 0.019526122, 0, 0.09807511, 0, 1.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010131836, 1.3498015, 0.00033569336)

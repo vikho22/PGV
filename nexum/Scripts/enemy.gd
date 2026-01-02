@@ -18,6 +18,19 @@ var dying: bool = false
 
 var player_target : Player = null
 
+
+@export var drop_items := {
+	"nothing": { "scene": null, "chance": 20 },
+	"bottle": {
+		"scene": preload("res://Shield/Scenes/bottle.tscn"),
+		"chance": 40
+	},
+	"apple": {
+		"scene": preload("res://Healing/Scenes/apple.tscn"),
+		"chance": 40
+	}
+}
+
 #Weapons:
 var weapon: Node3D = null
 
@@ -41,6 +54,7 @@ func die() -> void:
 	state_machine.travel("die")
 	
 	await get_tree().create_timer(2.0).timeout
+	drop_loot()
 	queue_free()
 
 func take_damage(damage: float):
@@ -59,3 +73,19 @@ func take_damage(damage: float):
 		can_take_damage = false
 		await get_tree().create_timer(damage_cooldown).timeout
 		can_take_damage = true
+		
+		
+func drop_loot():
+	var random = randi() % 100
+	
+	var accumulated := 0
+	for item in drop_items.values():
+		accumulated += item["chance"]
+		if random < accumulated:
+			if item["scene"] == null:
+				return
+			var instance = item["scene"].instantiate()
+			get_parent().add_child(instance)
+			instance.global_position = global_position
+			return
+	
