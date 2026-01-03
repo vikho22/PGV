@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5cew70fkmom8"]
 
-[ext_resource type="Texture2D" uid="uid://bpnntqerk1n4i" path="res://Images/Cover.jpg" id="1_2ytnu"]
+[ext_resource type="Texture2D" uid="uid://b1c5ejdk4q6w6" path="res://Images/Cover.jpg" id="1_2ytnu"]
 [ext_resource type="Script" uid="uid://dcrk0jgycyoyq" path="res://Scripts/Controles.gd" id="2_controls"]
 
 [node name="Controles" type="Control"]
@@ -127,6 +127,34 @@ text = "Saltar"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Space"
+horizontal_alignment = 2
+
+[node name="RowAttack" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowAttack"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Disparar/Atacar"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowAttack"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Left"
+horizontal_alignment = 2
+
+[node name="RowInteract" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Action" type="Button" parent="Panel/VBox/RowInteract"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Recoger"
+
+[node name="Bind" type="Label" parent="Panel/VBox/RowInteract"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "E"
 horizontal_alignment = 2
 
 [node name="Buttons" type="HBoxContainer" parent="Panel/VBox"]

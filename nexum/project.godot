@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Keybinds="*res://Scripts/Keybinds.gd"
 GameData="*res://Scripts/GameData.gd"
 
 [display]

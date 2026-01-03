@@ -34,6 +34,7 @@ func _on_body_entered(body):
 	if body.has_method("add_weapon"):
 		player_in_range = body  
 		if label_prompt:
+			_update_prompt_text()
 			label_prompt.visible = true 
 		
 
@@ -86,3 +87,9 @@ func update_visuals():
 		# var unique_process = particles.process_material.duplicate()
 		# unique_process.color = my_color
 		# particles.process_material = unique_process
+
+func _update_prompt_text() -> void:
+	if not label_prompt:
+		return
+	var key_text := Keybinds.get_key_text("interact")
+	label_prompt.text = "[%s] Recoger %s" % [key_text, weapon_type]

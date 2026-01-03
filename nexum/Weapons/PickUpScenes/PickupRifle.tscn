@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://l1y8tfmp7pad" path="res://Scripts/pickup.gd" id="1_cpkje"]
 [ext_resource type="PackedScene" uid="uid://bjnrufdbdx8rk" path="res://Weapons/Guns/rifle.tscn" id="2_cpkje"]
-[ext_resource type="PackedScene" uid="uid://bmlc3drm8ondw" path="res://Weapons/blaster-f.fbx" id="3_cpkje"]
+[ext_resource type="PackedScene" uid="uid://ddxt4cql4ygtg" path="res://Weapons/blaster-f.fbx" id="3_cpkje"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nre71"]
 radius = 1.5399755
@@ -62,7 +62,7 @@ light_cull_mask = 4294967294
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5012611, 0)
 pixel_size = 0.007
 billboard = 1
-text = "[E] Recoger Rifle
+text = "
 "
 
 [node name="Particles" type="GPUParticles3D" parent="."]
