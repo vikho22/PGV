@@ -45,7 +45,7 @@ https://www.kenney.nl/assets/blocky-characters
 ### 👤 Germán
 - [ ] **Cofres y Generación Objetos**
 - [ ] **Diversidad Objetos**
-- [ ] **Loot Enemigos**
+- [x] **Loot Enemigos**
 
 ### 🛠️ Tareas Generales / Sin Asignar
 - [ ] **Interfaz**
