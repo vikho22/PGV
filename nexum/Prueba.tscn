@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bts84bwus8t3s"]
 
-[ext_resource type="PackedScene" uid="uid://dkep3cjgp021n" path="res://Player/Player.tscn" id="1_7ucbv"]
+[ext_resource type="PackedScene" uid="uid://cl0ejs5fprww8" path="res://Player/Player.tscn" id="1_7ucbv"]
 [ext_resource type="Script" uid="uid://bo7ba2w538tcx" path="res://prueba.gd" id="1_vnpk6"]
-[ext_resource type="PackedScene" uid="uid://33ymr3m82wgl" path="res://Enemies/zombie.tscn" id="3_vnpk6"]
-[ext_resource type="PackedScene" uid="uid://xol32lvrlo1d" path="res://Healing/Scenes/apple.tscn" id="4_lgsii"]
+[ext_resource type="PackedScene" uid="uid://slcby1dutpyk" path="res://Enemies/Zombie.tscn" id="3_vnpk6"]
+[ext_resource type="PackedScene" uid="uid://dl2k7fykmv63" path="res://Healing/Scenes/apple.tscn" id="5_b0kld"]
 [ext_resource type="PackedScene" uid="uid://bjw6ktfpi2vit" path="res://Shield/Scenes/bottle.tscn" id="5_wgwtc"]
 
 [sub_resource type="Environment" id="Environment_7ucbv"]
@@ -18,7 +18,7 @@ size = Vector3(100, 0, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgsii"]
 size = Vector3(100, 0, 200)
 
-[node name="Node3D2" type="Node3D"]
+[node name="Node3D" type="Node3D"]
 script = ExtResource("1_vnpk6")
 
 [node name="Player" parent="." instance=ExtResource("1_7ucbv")]
@@ -48,8 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9998385, 0.017975925, 0, -0.017975925, 0.9
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.010454302, 0.99994534, 0, -0.99994534, 0.010454302, 0, 12.030867, 0)
 
-[node name="Apple" parent="." instance=ExtResource("4_lgsii")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1936646, -0.3748381, -8.659912)
+[node name="apple" parent="." instance=ExtResource("5_b0kld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.066507, 0, -7.07806)
 
-[node name="Bottle" parent="." instance=ExtResource("5_wgwtc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.568863, -0.37486863, -8.025635)
+[node name="bottle" parent="." instance=ExtResource("5_wgwtc")]
